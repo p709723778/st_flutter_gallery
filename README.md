@@ -1,6 +1,6 @@
 # st_flutter_gallery
 
-A new Flutter project.
+个人 flutter 工程,用于沉淀经验
 
 ## Getting Started
 
