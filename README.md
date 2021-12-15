@@ -1,6 +1,6 @@
 # st_flutter_gallery
 
-个人 flutter 工程,用于沉淀经验
+flutter 工程,用于沉淀姿势
 
 ## Getting Started
 

@@ -19,3 +19,23 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+# Mac
+.DS_Store
+
+# iOS
+Breakpoints_v2.xcbkptlist
+xcuserdata/
+xcshareddata/
+Podfile.lock
+
+# Android
+settings.gradle
+local.properties
+
+# Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+.idea/
+.fvm/
+.last_build_id
