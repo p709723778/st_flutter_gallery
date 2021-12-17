@@ -30,7 +30,7 @@ xcshareddata/
 Podfile.lock
 
 # Android
-settings.gradle
+.gradle/
 local.properties
 
 # Flutter
