@@ -7,7 +7,7 @@ echo "当前目录 $path"
 cd $path
 
 
-path=$path/flutter_native_splash.yaml
+path=$path/yaml/flutter_native_splash.yaml
 
 echo "yaml件路径 $path"
 
