@@ -83,6 +83,8 @@ dependencies:
   cached_network_image: ^3.0.0
   # 腾讯 bug 统计
   flutter_bugly: ^0.4.3
+  # 代码预览 & 显示源码
+  widget_with_codeview: ^2.0.1+2
 
 dev_dependencies:
 
