@@ -26,77 +26,102 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+# 应用依赖的包或插件。(如果我们的Flutter应用本身依赖某个包或插件，我们需要将所依赖的包添加到dependencies 下)
 dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   # 状态管理 / 国际化 / 路由等
-  get: ^4.1.4
+  get: ^4.6.5
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.15
   # 用于 schemes 跳转
-  url_launcher: ^6.0.3
+  url_launcher: ^6.1.5
   # http请求网络库
-  dio: ^4.0.0
+  dio: ^4.0.6
+  # dio 网络请求库日志
+  pretty_dio_logger: ^1.1.1
   # webSocket网路通讯库
   # 测试连接 http://www.websocket.org/echo.html
   # 使用说明 https://flutterchina.club/cookbook/networking/web-sockets/
-  web_socket_channel: ^2.0.0
+  web_socket_channel: ^2.2.0
   # 响应式编程
-  rxdart: ^0.26.0
+  rxdart: ^0.27.5
   # 推送权限
-  permission_handler: ^8.3.0
+  permission_handler: ^10.0.0
   # iOS (Keychain) Android (KeyStore)
-  flutter_secure_storage: ^4.1.0
+  flutter_secure_storage: ^5.1.0
   # 日志输出管理
-  logging: ^1.0.1
+  logging: ^1.0.2
   # App内显示的log系统(支持普通log / 网络日志)
   let_log: ^1.1.4
-  # json序列化
-  json_serializable: ^6.1.1
   # 应用包相关信息
-  package_info: ^2.0.0
+  package_info: ^2.0.2
   # device_info: ^2.0.0 #设备信息(只支持iOS Android)
   # device_info_plus 设备信息(支持全平台)
-  device_info_plus: ^1.0.0
+  device_info_plus: ^4.0.2
   # 日期格式化库
-  date_format: ^2.0.2
+  date_format: ^2.0.6
   # 图片选择器(备选: multi_image_picker: ^4.8.0)
-  image_picker: ^0.7.4
+  image_picker: ^0.8.5+3
   # 网络连接状态
-  connectivity_plus: ^1.0.0
+  connectivity_plus: ^2.3.6
   # 唯一标识符
-  uuid: ^3.0.4
+  uuid: ^3.0.6
   # 编码转换
-  convert: ^3.0.0
+  convert: ^3.0.2
   # 加密
-  crypto: ^3.0.1
+  crypto: ^3.0.2
   # 解压缩
-  archive: ^3.1.2
+  archive: ^3.3.1
   # 监听值变化
-  provider: ^5.0.0
+  provider: ^6.0.3
   # 图片缓存
-  cached_network_image: ^3.0.0
+  cached_network_image: ^3.2.1
   # 腾讯 bug 统计
-  flutter_bugly: ^0.4.3
+  flutter_bugly: ^0.4.4
   # 代码预览 & 显示源码
   widget_with_codeview: ^2.0.1+2
+  # 用于适配屏幕和字体大小
+  flutter_screenutil: ^5.5.3+2
+  # 需要依赖的注解 https://github.com/google/json_serializable.dart/tree/master/example
+  json_annotation: ^4.6.0
+  # toast提示
+  oktoast: ^3.2.0
+  # 上下拉刷新加载
+  pull_to_refresh: ^2.0.0
+  # 字符集
+  characters: ^1.2.0
+  # 文件路径
+  path_provider: ^2.0.11
+  path: ^1.8.1
+  # 主题管理
+  adaptive_theme: ^3.1.1
+  # 滑动开关控件
+  flutter_switch: ^0.3.2
 
+#dependency_overrides:
+#  characters: ^1.2.1
+
+# 开发环境依赖的工具包（而不是flutter应用本身依赖的包）
 dev_dependencies:
 
-  # JSON序列化model
-  build_runner: ^2.1.1
+  # JSON序列化model(Dart 代码生成工具)
+  build_runner: ^2.2.0
+  # json序列化
+  json_serializable: ^6.3.1
   # 修改不同平台的 app名称 / bundleId
   rename: ^2.0.1
   # 统一修改启动页
-  flutter_native_splash: ^1.3.2
+  flutter_native_splash: ^2.2.7
   # 统一修改 App Icon
-  flutter_launcher_icons: ^0.9.2
-
+  flutter_launcher_icons: ^0.10.0
 
   flutter_test:
     sdk: flutter
@@ -106,7 +131,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
