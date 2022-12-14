@@ -18,9 +18,12 @@ class ApiException implements Exception {
       case DioErrorType.response:
         try {
           /// http错误码带业务错误信息
-          final apiResponse = ApiResponseModel.fromJson(error.response?.data);
-          if (apiResponse.code != null) {
-            return ApiException(apiResponse.code, apiResponse.message);
+          var apiResponse = ApiResponseModel();
+          if (error.response?.data is! String) {
+            apiResponse = ApiResponseModel.fromJson(error.response?.data);
+          }
+          if (apiResponse.status != null) {
+            return ApiException(apiResponse.status, apiResponse.message);
           }
 
           final errCode = error.response?.statusCode;
@@ -74,6 +77,11 @@ class ApiException implements Exception {
   final String? message;
   final int? code;
   String? stackInfo;
+
+  @override
+  String toString() {
+    return {'code': code, 'message': message}.toString();
+  }
 }
 
 /// 请求错误

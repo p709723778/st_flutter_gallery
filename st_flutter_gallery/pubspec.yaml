@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0+14
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -37,74 +37,104 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
+  intl: ^0.17.0
   # 状态管理 / 国际化 / 路由等
   get: ^4.6.5
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
   shared_preferences: ^2.0.15
   # 用于 schemes 跳转
-  url_launcher: ^6.1.5
+  url_launcher: ^6.1.7
   # http请求网络库
   dio: ^4.0.6
   # dio 网络请求库日志
   pretty_dio_logger: ^1.1.1
+  # dio cookie 管理
+  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^3.0.1
+#  cookie_jar: ^3.0.1
   # webSocket网路通讯库
   # 测试连接 http://www.websocket.org/echo.html
   # 使用说明 https://flutterchina.club/cookbook/networking/web-sockets/
   web_socket_channel: ^2.2.0
   # 响应式编程
-  rxdart: ^0.27.5
+  rxdart: ^0.27.7
   # 推送权限
-  permission_handler: ^10.0.0
+  permission_handler: ^10.2.0
   # iOS (Keychain) Android (KeyStore)
-  flutter_secure_storage: ^5.1.0
+  flutter_secure_storage: ^6.1.0
   # 日志输出管理
-  logging: ^1.0.2
+  logging: ^1.1.0
   # App内显示的log系统(支持普通log / 网络日志)
   let_log: ^1.1.4
   # 应用包相关信息
-  package_info: ^2.0.2
-  # device_info: ^2.0.0 #设备信息(只支持iOS Android)
+  package_info_plus: ^3.0.2
   # device_info_plus 设备信息(支持全平台)
-  device_info_plus: ^4.0.2
+  device_info_plus: ^8.0.0
   # 日期格式化库
-  date_format: ^2.0.6
+  date_format: ^2.0.7
   # 图片选择器(备选: multi_image_picker: ^4.8.0)
-  image_picker: ^0.8.5+3
+  image_picker: ^0.8.6
   # 网络连接状态
-  connectivity_plus: ^2.3.6
+  connectivity_plus: ^3.0.2
   # 唯一标识符
-  uuid: ^3.0.6
+  uuid: ^3.0.7
   # 编码转换
-  convert: ^3.0.2
-  # 加密
+  convert: ^3.1.1
+  # 支持SHA、MD5、HMAC 哈希加密
   crypto: ^3.0.2
+  # 支持 AES / Salsa20 / Fernet / RSA 加密
+  encrypt: ^5.0.1
+  pointycastle: ^3.6.2
   # 解压缩
-  archive: ^3.3.1
+  archive: ^3.3.5
   # 监听值变化
-  provider: ^6.0.3
+  provider: ^6.0.4
   # 图片缓存
-  cached_network_image: ^3.2.1
+  cached_network_image: ^3.2.3
+  # svg 控件
+  flutter_svg: ^1.1.6
   # 腾讯 bug 统计
   flutter_bugly: ^0.4.4
   # 代码预览 & 显示源码
-  widget_with_codeview: ^2.0.1+2
+  widget_with_codeview: ^3.0.1
   # 用于适配屏幕和字体大小
-  flutter_screenutil: ^5.5.3+2
+  flutter_screenutil: ^5.6.0
   # 需要依赖的注解 https://github.com/google/json_serializable.dart/tree/master/example
-  json_annotation: ^4.6.0
+  json_annotation: ^4.7.0
   # toast提示
-  oktoast: ^3.2.0
+  oktoast: ^3.3.1
   # 上下拉刷新加载
-  pull_to_refresh: ^2.0.0
+  easy_refresh: ^3.0.5
   # 字符集
-  characters: ^1.2.0
+  characters: ^1.2.1
   # 文件路径
   path_provider: ^2.0.11
-  path: ^1.8.1
+  # 路径操作库
+  path: ^1.8.2
   # 主题管理
   adaptive_theme: ^3.1.1
   # 滑动开关控件
   flutter_switch: ^0.3.2
+  # google官方数据通讯协议
+  protobuf: ^2.1.0
+  # tab_bar 三方库
+  convex_bottom_bar: ^3.1.0+1
+  # loading 控件
+  flutter_easyloading: ^3.0.5
+  # 各种样式控件库
+  getwidget: ^3.0.1
+  # 下拉列表
+  dropdown_button2: ^1.9.1
+  # 时间轴控件
+  timelines: ^0.1.0
+  # 设置回退到安卓手机桌面
+  move_to_background: ^1.0.2
+  just_throttle_it: ^2.1.0
+  just_debounce_it: ^4.1.0
+  flutter_life_state: ^1.0.1
+  flutter_cupertino_datetime_picker: ^3.0.0
+  # 调试相关信息(此空间可以自己编写一个)
+#  debug_friend: ^1.0.0
 
 #dependency_overrides:
 #  characters: ^1.2.1
@@ -113,15 +143,17 @@ dependencies:
 dev_dependencies:
 
   # JSON序列化model(Dart 代码生成工具)
-  build_runner: ^2.2.0
+  build_runner: ^2.3.2
   # json序列化
-  json_serializable: ^6.3.1
+  json_serializable: ^6.5.4
   # 修改不同平台的 app名称 / bundleId
   rename: ^2.0.1
   # 统一修改启动页
-  flutter_native_splash: ^2.2.7
+  flutter_native_splash: ^2.2.16
   # 统一修改 App Icon
-  flutter_launcher_icons: ^0.10.0
+  # 命令如下
+  # flutter pub run flutter_launcher_icons:main -f yaml/flutter_launcher_icons.yaml
+  flutter_launcher_icons: ^0.11.0
 
   flutter_test:
     sdk: flutter
@@ -147,6 +179,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/icons/app_icon/
+    - assets/images/tab_bar/
+    - assets/images/nav_bar/
+    - assets/images/main/
+    - assets/svg/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

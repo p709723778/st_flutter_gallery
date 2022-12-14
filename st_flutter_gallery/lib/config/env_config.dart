@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:st/app/constants/sp_keys.dart';
 import 'package:st/services/sp_service/sp_service.dart';
@@ -24,19 +27,30 @@ class EnvConfig {
   static Env env = Env.pro;
 
   /// 是否使用https
-  static bool useHttps = true;
+  static bool useHttps = false;
 
   /// 协议头
-  static String get httpScheme => useHttps ? 'https' : 'http';
+  static String get httpScheme => useHttps ? 'https://' : 'http://';
 
   /// 服务器地址
-  static String get host => "${useHttps ? "https" : "http"}://${_hosts[env]}";
+  static String get baseUrl {
+    final host = _hosts[env];
+    final baseUrl = '$httpScheme$host';
+
+    final baseUri = Uri.parse(baseUrl);
+
+    return baseUri.toString();
+  }
 
   static const Map _hosts = {
-    Env.dev: "dev.com",
-    Env.sandbox: "sandbox.com",
-    Env.pre: "pre.com",
-    Env.pro: "fastmock.site",
+    Env.dev: "219.144.185.121:11380",
+    Env.sandbox: "219.144.185.121:11380",
+    Env.pre: "219.144.185.121:11380",
+    Env.pro: "219.144.185.121:11380",
+    // Env.dev: "wnsykj.drillass.com",
+    // Env.sandbox: "wnsykj.drillass.com",
+    // Env.pre: "wnsykj.drillass.com",
+    // Env.pro: "wnsykj.drillass.com",
   };
 
   static Future<void> initEnvConfig() async {
@@ -49,25 +63,26 @@ class EnvConfig {
     }
   }
 
-  static void _setEnv(Env env) {
+  static void setEnv(Env env) {
     SpService.setInt(SpKeys.networkEnvShared, env.index);
-    showToast("网络环境已设置为 ${envConvertString(env)}，重启后生效");
+    showToast('网络环境已设置为 @环境，重启后生效'.trParams({'环境': envConvertString(env)}));
+    Future.delayed(3.seconds, exit(0));
   }
 
   static String envConvertString(Env env) {
     final String envString;
     switch (env) {
       case Env.dev:
-        envString = '开发环境';
+        envString = '开发环境'.tr;
         break;
       case Env.sandbox:
-        envString = '沙盒环境';
+        envString = '沙盒环境'.tr;
         break;
       case Env.pre:
-        envString = '预发环境';
+        envString = '预发环境'.tr;
         break;
       case Env.pro:
-        envString = '正式环境';
+        envString = '正式环境'.tr;
         break;
     }
     return envString;

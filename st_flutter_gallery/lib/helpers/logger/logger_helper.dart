@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
@@ -9,29 +11,43 @@ final logger = Logger.root;
 final wsLogger = Logger("ws");
 final httpLogger = Logger("http");
 
-class LoggerHelper {
-  static void initLogger() {
-    if (!kDebugMode && !EnvConfig.isDebug) {
-      Get.isLogEnable = false;
-      logger.level = Level.OFF;
-      return;
-    }
+StreamSubscription? _logSubscription;
 
-    logger.level = Level.ALL;
-    logger.onRecord.listen((record) {
-      switch (record.level.name) {
-        case "WARNING":
-          let_log.Logger.warn(record.message);
-          break;
-        case "SEVERE":
-          let_log.Logger.error(record.message, record.error);
-          break;
-        default:
-          let_log.Logger.log(record.message);
-          break;
+void initLogger() {
+  if (!kDebugMode && !EnvConfig.isDebug) {
+    Get.isLogEnable = false;
+    logger.level = Level.OFF;
+    _logSubscription?.cancel();
+    return;
+  }
+  Get.isLogEnable = true;
+  logger.level = Level.ALL;
+  _logSubscription?.cancel();
+  logger.onRecord.listen((record) {
+    switch (record.level.name) {
+      case "WARNING":
+        let_log.Logger.warn(record.message);
+        break;
+      case "SEVERE":
+        let_log.Logger.error(record.message, record.error);
+        break;
+      default:
+        let_log.Logger.log(record.message);
+        break;
+    }
+    // if (kDebugMode) {
+    //   if (record.error != null) print("Logger ${record.error.toString()}");
+    //   print("Logger ${record.message}");
+    // }
+  });
+}
+
+class LoggerHelper {
+  static void log(String text, {bool isError = false}) {
+    Future.microtask(() {
+      if (isError || Get.isLogEnable) {
+        logger.info('[GetX] ** $text. isError: [$isError]');
       }
-      if (record.error != null) logger.severe(record.error.toString());
-      logger.info(record.message);
     });
   }
 }

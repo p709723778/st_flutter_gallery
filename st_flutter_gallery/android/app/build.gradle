@@ -26,11 +26,32 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('../../../signature/zk.jks')
+            storePassword '111111'
+            keyAlias 'zk_alias'
+            keyPassword '111111'
+        }
+
+        release {
+            storeFile file('../../../signature/zk.jks')
+            storePassword '111111'
+            keyAlias 'zk_alias'
+            keyPassword '111111'
+        }
+    }
     compileSdkVersion 33
 //    compileSdkVersion flutter.compileSdkVersion
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     kotlinOptions {
@@ -43,7 +64,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.st.gallery"
+        applicationId "com.drillass.wnsykj"
         minSdkVersion 21
         targetSdkVersion 28
 //        minSdkVersion flutter.minSdkVersion

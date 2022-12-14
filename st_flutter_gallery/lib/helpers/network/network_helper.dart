@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:st/app/models/api_response/api_response_model.dart';
 import 'package:st/config/env_config.dart';
+import 'package:st/helpers/logger/logger_helper.dart';
 import 'package:st/helpers/network/api_exception.dart';
 import 'package:st/helpers/network/network_adapter.dart';
 import 'package:st/helpers/network/request_config.dart';
@@ -46,6 +48,7 @@ class NetworkHelper {
     // ignore: type_annotate_public_apis
     data,
     Map<String, dynamic>? headers,
+    bool needOriginalData = false,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
@@ -68,10 +71,16 @@ class NetworkHelper {
         options: options,
       );
 
-      return _handleResponse(response);
+      return _handleResponse(response, needOriginalData: needOriginalData);
     } on Exception catch (e) {
       final exception = ApiException.from(e);
       if (onError?.call(exception) != true) {
+        logger.severe(exception);
+        if (!needOriginalData) {
+          if (exception.code != 302) {
+            showToast(exception.message ?? '服务器异常');
+          }
+        }
         throw exception;
       }
     }
@@ -91,6 +100,7 @@ class NetworkHelper {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
     bool showLoading = true,
+    bool needOriginalData = false,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
@@ -100,6 +110,7 @@ class NetworkHelper {
       url,
       queryParameters: queryParameters,
       headers: headers,
+      needOriginalData: needOriginalData,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
@@ -114,6 +125,7 @@ class NetworkHelper {
     data,
     Map<String, dynamic>? headers,
     bool showLoading = true,
+    bool needOriginalData = false,
     CancelToken? cancelToken,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
@@ -125,56 +137,7 @@ class NetworkHelper {
       queryParameters: queryParameters,
       data: data,
       headers: headers,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-      onError: onError,
-    );
-  }
-
-  Future<ApiResponseModel?> delete(
-    String url, {
-    Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
-    Map<String, dynamic>? headers,
-    bool showLoading = true,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-    bool Function(ApiException)? onError,
-  }) {
-    return request(
-      url,
-      method: "DELETE",
-      queryParameters: queryParameters,
-      data: data,
-      headers: headers,
-      cancelToken: cancelToken,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-      onError: onError,
-    );
-  }
-
-  Future<ApiResponseModel?> put(
-    String url, {
-    Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
-    Map<String, dynamic>? headers,
-    bool showLoading = true,
-    CancelToken? cancelToken,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-    bool Function(ApiException)? onError,
-  }) {
-    return request(
-      url,
-      method: "PUT",
-      queryParameters: queryParameters,
-      data: data,
-      headers: headers,
+      needOriginalData: needOriginalData,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
@@ -183,23 +146,37 @@ class NetworkHelper {
   }
 
   ///请求响应内容处理
-  ApiResponseModel _handleResponse(Response response) {
+  ApiResponseModel _handleResponse(
+    Response response, {
+    bool needOriginalData = false,
+  }) {
+    if (needOriginalData) {
+      return ApiResponseModel(response: response);
+    }
+
     if (response.statusCode == 200) {
       final apiResponse = ApiResponseModel.fromJson(response.data);
       return _handleBusinessResponse(apiResponse);
     } else {
       final exception =
           ApiException(response.statusCode, ApiException.unknownException);
+      showToast(exception.message!);
       throw exception;
     }
   }
 
   ///业务内容处理
   ApiResponseModel _handleBusinessResponse(ApiResponseModel response) {
-    if (response.code == RequestConfig.successCode) {
+    if (response.isSuccess!) {
+      if (kDebugMode) {
+        print(jsonEncode(response.data));
+      }
       return response;
     } else {
-      final exception = ApiException(response.code, response.message);
+      var exception = ApiException(response.status, response.stackMessage);
+      if (response.status == null && response.stackMessage == null) {
+        exception = ApiException(-1, '服务器数据异常');
+      }
       throw exception;
     }
   }

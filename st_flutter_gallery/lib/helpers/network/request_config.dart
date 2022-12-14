@@ -2,7 +2,7 @@ import 'package:st/config/env_config.dart';
 
 class RequestConfig {
   /// 主域名地址
-  static String baseUrl = EnvConfig.host;
+  static String baseUrl = EnvConfig.baseUrl;
 
   /// 请求连接超时时长
   static const connectTimeout = 15000;

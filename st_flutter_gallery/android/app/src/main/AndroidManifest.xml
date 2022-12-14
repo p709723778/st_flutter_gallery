@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.st_flutter_gallery">
+    package="com.drillass.wnsykj">
    <application
-        android:label="st_flutter_gallery"
+        android:label="矿用智能打钻管理助手"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

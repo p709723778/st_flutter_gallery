@@ -1,0 +1,9 @@
+先登录
+http://219.144.185.121:11380/portal/#/login
+在用接口文档
+http://219.144.185.121:11381/swagger-ui.html
+
+
+
+打包命令
+flutter build apk --no-sound-null-safety --release

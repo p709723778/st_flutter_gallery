@@ -1,41 +1,52 @@
-import 'package:st/helpers/network/request_config.dart';
+import 'package:dio/dio.dart';
 
 class ApiResponseModel {
   ApiResponseModel({
+    this.timestamp,
     this.status,
-    this.code,
     this.message,
-    this.desc,
-    this.requestId,
+    this.stackMessage,
+    this.path,
+    this.extraInfo,
+    this.success,
     this.data,
+    this.response,
   });
   ApiResponseModel.fromJson(Map<String, dynamic> json) {
+    timestamp = json['timestamp'];
     status = json['status'];
-    code = json['code'];
     message = json['message'];
-    desc = json['desc'];
-    requestId = json['request_id'];
+    stackMessage = json['stackmessage'];
+    path = json['path'];
+    extraInfo = json['extraInfo'];
+    success = json['success'];
     data = json['data'];
   }
 
-  bool? status;
-  late int? code;
+  int? timestamp;
+  int? status;
   late String? message;
-  late String? desc;
-  late String? requestId;
+  late String? stackMessage;
+  late String? path;
+  late Map? extraInfo;
+  bool? success;
   dynamic data;
+  dynamic dataModel;
+  Response? response;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['timestamp'] = timestamp;
     map['status'] = status;
-    map['code'] = code;
     map['message'] = message;
-    map['desc'] = desc;
-    map['request_id'] = requestId;
+    map['stackmessage'] = stackMessage;
+    map['path'] = path;
+    map['extraInfo'] = extraInfo;
+    map['success'] = success;
     map['data'] = data;
     return map;
   }
 
   /// 当前请求状态是否成功
-  bool get isSuccess => code == RequestConfig.successCode;
+  bool? get isSuccess => success;
 }

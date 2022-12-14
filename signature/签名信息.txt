@@ -1,0 +1,12 @@
+alias: zk_alias
+key store password: 111111
+ke password: 111111
+
+编译命令
+flutter build apk --no-sound-null-safety --release
+
+查看设备
+adb devices     
+
+安装
+adb install -r /Users/Soto/st_flutter_gallery/st_flutter_gallery/build/app/outputs/apk/release/app-release.apk
