@@ -5,17 +5,23 @@ import 'package:st/helpers/logger/logger_helper.dart';
 class ApiException implements Exception {
   ApiException([this.code, this.message]);
 
-  factory ApiException.fromDioError(DioError error) {
+  factory ApiException.fromDioError(DioException error) {
     switch (error.type) {
-      case DioErrorType.cancel:
+      case DioExceptionType.badCertificate:
+        return BadRequestException(-1, "请求证书错误");
+      case DioExceptionType.connectionError:
+        return BadRequestException(-1, "连接错误");
+      case DioExceptionType.unknown:
+        return ApiException(-1, error.message);
+      case DioExceptionType.cancel:
         return BadRequestException(-1, "请求取消");
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         return BadRequestException(-1, "连接超时");
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return BadRequestException(-1, "请求超时");
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return BadRequestException(-1, "响应超时");
-      case DioErrorType.response:
+      case DioExceptionType.badResponse:
         try {
           /// http错误码带业务错误信息
           final apiResponse = ApiResponseModel.fromJson(error.response?.data);
@@ -53,13 +59,11 @@ class ApiException implements Exception {
           logger.severe(e);
           return ApiException(-1, unknownException);
         }
-      case DioErrorType.other:
-        return ApiException(-1, error.message);
     }
   }
 
   factory ApiException.from(exception) {
-    if (exception is DioError) {
+    if (exception is DioException) {
       return ApiException.fromDioError(exception);
     }
     if (exception is ApiException) {
@@ -74,15 +78,19 @@ class ApiException implements Exception {
   final String? message;
   final int? code;
   String? stackInfo;
+
+  @override
+  String toString() {
+    return {'code': code, 'message': message}.toString();
+  }
 }
 
 /// 请求错误
 class BadRequestException extends ApiException {
-  BadRequestException([int? code, String? message]) : super(code, message);
+  BadRequestException([super.code, super.message]);
 }
 
 /// 未认证异常
 class UnauthorisedException extends ApiException {
-  UnauthorisedException([int code = -1, String message = ''])
-      : super(code, message);
+  UnauthorisedException([int super.code = -1, String super.message = '']);
 }

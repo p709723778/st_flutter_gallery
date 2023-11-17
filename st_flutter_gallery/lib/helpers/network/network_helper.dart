@@ -5,13 +5,14 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:st/app/models/api_response/api_response_model.dart';
 import 'package:st/config/env_config.dart';
+import 'package:st/helpers/logger/logger_helper.dart';
 import 'package:st/helpers/network/api_exception.dart';
 import 'package:st/helpers/network/network_adapter.dart';
 import 'package:st/helpers/network/request_config.dart';
 
 class NetworkHelper {
   NetworkHelper({this.baseOptions, this.interceptors, this.networkProxy}) {
-    _dio = Dio()
+    dio = Dio()
       ..options = baseOptions ??
           BaseOptions(
             baseUrl: RequestConfig.baseUrl,
@@ -23,7 +24,7 @@ class NetworkHelper {
 
     /// 调试模式输出日志
     if (kDebugMode || EnvConfig.isDebug) {
-      _dio.interceptors.add(
+      dio.interceptors.add(
         PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
@@ -32,46 +33,42 @@ class NetworkHelper {
       );
     }
 
-    NetworkAdapter.setProxy(_dio, networkProxy ?? '');
+    setProxy(networkProxy ?? '');
   }
-  late Dio _dio;
+  late Dio dio;
   late BaseOptions? baseOptions;
   late Interceptors? interceptors;
   late String? networkProxy;
 
   Future<ApiResponseModel?> request(
     String url, {
-    String method = "Get",
+    String method = "GET",
+    Object? data,
     Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
-    Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     bool Function(ApiException)? onError,
   }) async {
     try {
-      final options = Options()
-        ..method = method
-        ..headers = headers;
-
       data = _convertRequestData(data);
 
-      final response = await _dio.request(
+      final response = await dio.request(
         url,
-        queryParameters: queryParameters,
         data: data,
+        queryParameters: queryParameters,
         cancelToken: cancelToken,
+        options: options,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
-        options: options,
       );
 
       return _handleResponse(response);
     } on Exception catch (e) {
       final exception = ApiException.from(e);
       if (onError?.call(exception) != true) {
+        logger.severe(exception);
         throw exception;
       }
     }
@@ -88,19 +85,21 @@ class NetworkHelper {
 
   Future<ApiResponseModel?> get(
     String url, {
+    Object? data,
     Map<String, dynamic>? queryParameters,
-    Map<String, dynamic>? headers,
     bool showLoading = true,
     CancelToken? cancelToken,
+    Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     bool Function(ApiException)? onError,
   }) {
     return request(
       url,
+      data: data,
       queryParameters: queryParameters,
-      headers: headers,
       cancelToken: cancelToken,
+      options: options,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
       onError: onError,
@@ -109,12 +108,12 @@ class NetworkHelper {
 
   Future<ApiResponseModel?> post(
     String url, {
+    Object? data,
     Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
     Map<String, dynamic>? headers,
     bool showLoading = true,
     CancelToken? cancelToken,
+    Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     bool Function(ApiException)? onError,
@@ -122,10 +121,10 @@ class NetworkHelper {
     return request(
       url,
       method: "POST",
-      queryParameters: queryParameters,
       data: data,
-      headers: headers,
+      queryParameters: queryParameters,
       cancelToken: cancelToken,
+      options: options,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
       onError: onError,
@@ -134,12 +133,12 @@ class NetworkHelper {
 
   Future<ApiResponseModel?> delete(
     String url, {
+    Object? data,
     Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
     Map<String, dynamic>? headers,
     bool showLoading = true,
     CancelToken? cancelToken,
+    Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     bool Function(ApiException)? onError,
@@ -147,10 +146,10 @@ class NetworkHelper {
     return request(
       url,
       method: "DELETE",
-      queryParameters: queryParameters,
       data: data,
-      headers: headers,
+      queryParameters: queryParameters,
       cancelToken: cancelToken,
+      options: options,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
       onError: onError,
@@ -159,12 +158,12 @@ class NetworkHelper {
 
   Future<ApiResponseModel?> put(
     String url, {
+    Object? data,
     Map<String, dynamic>? queryParameters,
-    // ignore: type_annotate_public_apis
-    data,
     Map<String, dynamic>? headers,
     bool showLoading = true,
     CancelToken? cancelToken,
+    Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     bool Function(ApiException)? onError,
@@ -172,10 +171,10 @@ class NetworkHelper {
     return request(
       url,
       method: "PUT",
-      queryParameters: queryParameters,
       data: data,
-      headers: headers,
+      queryParameters: queryParameters,
       cancelToken: cancelToken,
+      options: options,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
       onError: onError,
@@ -199,7 +198,10 @@ class NetworkHelper {
     if (response.code == RequestConfig.successCode) {
       return response;
     } else {
-      final exception = ApiException(response.code, response.message);
+      var exception = ApiException(response.code, response.message);
+      if (response.code == null && response.message == null) {
+        exception = ApiException(-1, '服务器数据异常');
+      }
       throw exception;
     }
   }

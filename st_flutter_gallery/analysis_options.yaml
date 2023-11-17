@@ -44,9 +44,9 @@ linter:
 #    - always_specify_types # Blindly follow the Flutter code style, which prefers types everywhere
     - always_use_package_imports
     - annotate_overrides
-    - avoid_annotating_with_dynamic
+#    - avoid_annotating_with_dynamic
     - avoid_bool_literals_in_conditional_expressions
-    - avoid_catches_without_on_clauses
+#    - avoid_catches_without_on_clauses
     - avoid_catching_errors
 #    - avoid_classes_with_only_static_members # Util classes are awesome!
     - avoid_double_and_int_checks
@@ -97,7 +97,7 @@ linter:
 #    - constant_identifier_names
     - control_flow_in_finally
     - curly_braces_in_flow_control_structures
-    - depend_on_referenced_packages
+#    - depend_on_referenced_packages
     - deprecated_consistency
 #    - diagnostic_describe_all_properties
     - directives_ordering
@@ -112,14 +112,13 @@ linter:
     - flutter_style_todos
     - hash_and_equals
     - implementation_imports
-    - iterable_contains_unrelated_type
+    - collection_methods_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_names
     - library_prefixes
     - library_private_types_in_public_api
 #    - lines_longer_than_80_chars # Back to the 80s
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
@@ -153,7 +152,6 @@ linter:
     - prefer_constructors_over_static_methods
     - prefer_contains
 #    - prefer_double_quotes
-    - prefer_equal_for_default_values
 #    - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_in_for_each
@@ -205,7 +203,7 @@ linter:
     - unnecessary_constructor_name
 #    - unnecessary_final
     - unnecessary_getters_setters
-    - unnecessary_lambdas
+#    - unnecessary_lambdas
     - unnecessary_late
     - unnecessary_new
     - unnecessary_null_aware_assignments
