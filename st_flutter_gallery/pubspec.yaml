@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 2.0.0+1
 
 environment:
   sdk: ">=2.17.0 <4.0.0"
@@ -43,7 +43,7 @@ dependencies:
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
   shared_preferences: ^2.2.2
   # http请求网络库
-  dio: ^5.3.3
+  dio: ^5.4.0
   # dio 网络请求库日志
   pretty_dio_logger: ^1.3.1
   # dio cookie 管理
@@ -55,7 +55,7 @@ dependencies:
   # 响应式编程
   rxdart: ^0.27.7
   # 推送权限
-  permission_handler: ^11.0.1
+  permission_handler: ^11.1.0
   # iOS (Keychain) Android (KeyStore)
   flutter_secure_storage: ^9.0.0
   # 日志输出管理
@@ -65,15 +65,15 @@ dependencies:
     git:
       url: https://gitee.com/p709723778/let_log.git
   # 应用包相关信息
-  package_info_plus: ^4.2.0
+  package_info_plus: ^5.0.1
   # device_info_plus 设备信息(支持全平台)
-  device_info_plus: ^9.1.0
+  device_info_plus: ^9.1.1
   # 日期格式化库
   date_format: ^2.0.7
   # 图片选择器(备选: multi_image_picker: ^4.8.0)
   image_picker: ^1.0.4
   # 网络连接状态
-  connectivity_plus: ^5.0.1
+  connectivity_plus: ^5.0.2
   # 唯一标识符
   uuid: ^4.2.1
   # 编码转换
@@ -83,7 +83,6 @@ dependencies:
   # 支持 AES / Salsa20 / Fernet / RSA 加密
   encrypt: ^5.0.3
   pointycastle: ^3.7.3
-  sm_crypto: ^1.0.3
   # 解压缩
   archive: ^3.4.9
   # 监听值变化
@@ -103,7 +102,7 @@ dependencies:
   # 需要依赖的注解 https://github.com/google/json_serializable.dart/tree/master/example
   json_annotation: ^4.8.1
   # toast提示
-  oktoast: ^3.3.2+1
+  oktoast: ^3.4.0
   # 上下拉刷新加载
   easy_refresh: ^3.3.2+4
   # 字符集
@@ -164,7 +163,7 @@ dependencies:
   # 图片压缩压缩插件 https://github.com/OpenFlutter/flutter_image_compress
   flutter_image_compress: ^2.1.0
   # 具有渐隐边缘的滚动视图 https://github.com/mponkin/fading_edge_scrollview
-  fading_edge_scrollview: ^3.0.0
+  fading_edge_scrollview: ^4.0.0
   # 用于decoration的虚线边框，类似BoxDocoration https://github.com/mdalameen/dotted_decoration
   dotted_decoration: ^2.0.0
   # 虚线边框小部件 https://github.com/ajilo297/Flutter-Dotted-Border
@@ -207,20 +206,23 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   event_bus: ^2.0.0
   # 媒体播放
-  flutter_vlc_player: ^7.4.0
+#  flutter_vlc_player: ^7.4.0
   media_kit: ^1.1.10+1                             # Primary package.
   media_kit_video: ^1.2.4                        # For video rendering.
   media_kit_libs_video: ^1.0.4                   # Native video dependencies.
   fijkplayer: ^0.11.0
   # 蓝牙(低功率LE)
-  flutter_blue_plus: ^1.28.14
+  flutter_blue_plus: ^1.29.8
   flutter_bluetooth_serial:
     git:
       url: https://gitee.com/p709723778/flutter_bluetooth_serial.git
       ref: feature/develop_server
   # 类似ios cell 左滑删除组件
-  flutter_swipe_action_cell: ^3.1.2
+  flutter_swipe_action_cell: ^3.1.3
   flutter_cupertino_datetime_picker: ^3.0.0
+  # 1.0.3
+  sm_crypto:
+    path: ../plugins/sm_crypto
 
 
 
@@ -242,14 +244,14 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
   # JSON序列化model(Dart 代码生成工具)
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
   # json序列化
   json_serializable: ^6.7.1
   # 修改不同平台的 app名称 / bundleId
   rename: ^3.0.1
   # 统一修改启动页
   #  flutter pub run flutter_native_splash:create --path=yaml/flutter_native_splash.yaml
-  flutter_native_splash: ^2.3.5
+  flutter_native_splash: ^2.3.6
   # 统一修改 App Icon
   # 命令如下
   # flutter pub run flutter_launcher_icons:main -f yaml/flutter_launcher_icons.yaml
@@ -258,7 +260,7 @@ dev_dependencies:
 
   # 字节跳动的调试工具
   flutter_ume_plus: ^3.0.0
-  flutter_ume_kit_dio_plus: ^3.4.1
+  flutter_ume_kit_dio_plus: ^3.4.2
   flutter_ume_kit_show_code_plus: ^3.0.0
   flutter_ume_kit_device_plus: ^2.0.0
   flutter_ume_kit_console_plus: ^2.0.0

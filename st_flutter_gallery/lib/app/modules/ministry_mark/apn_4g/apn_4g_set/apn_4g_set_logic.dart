@@ -52,6 +52,7 @@ class Apn4gSetLogic extends GetxController {
   @override
   void onClose() {
     _streamSubscription.cancel();
+    controller1.dispose();
     super.onClose();
   }
 

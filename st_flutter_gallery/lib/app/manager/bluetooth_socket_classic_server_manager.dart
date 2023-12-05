@@ -57,7 +57,7 @@ class BluetoothSocketClassicServerManager
         }),
       );
 
-      logger.info('已经连接到了设备');
+      logger.info('开启蓝牙服务器模式成功,待设备加入');
       await EasyLoading.dismiss();
       showToast('开启蓝牙服务器模式成功,待设备加入');
     } catch (exception) {

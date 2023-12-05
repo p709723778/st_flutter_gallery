@@ -70,6 +70,12 @@ class DriverIcSetLogic extends GetxController {
   @override
   void onClose() {
     _streamSubscription.cancel();
+    controllerIcNo.dispose();
+    controllerCertificateCode.dispose();
+    controllerDriverName.dispose();
+    controllerDriverNo.dispose();
+    controllerOrganizationName.dispose();
+    controllerIdCardNo.dispose();
     super.onClose();
   }
 

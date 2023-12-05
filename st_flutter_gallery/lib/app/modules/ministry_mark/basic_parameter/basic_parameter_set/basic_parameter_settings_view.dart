@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:st/app/routes/app_pages.dart';
-import 'package:st/config/env_config.dart';
 
 class BasicParameterSettingsPage extends StatelessWidget {
   const BasicParameterSettingsPage({super.key});
@@ -123,7 +122,7 @@ class BasicParameterSettingsPage extends StatelessWidget {
                 },
               ),
             ],
-          ).toList().sublist(0, EnvConfig.isBuildPackage ? 13 : 14),
+          ).toList(),
         ),
       ),
     );

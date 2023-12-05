@@ -71,6 +71,8 @@ import 'package:st/app/modules/ministry_mark/speed_type/speed_type_get/speed_typ
 import 'package:st/app/modules/ministry_mark/speed_type/speed_type_get/speed_type_get_view.dart';
 import 'package:st/app/modules/ministry_mark/speed_type/speed_type_set/speed_type_set_binding.dart';
 import 'package:st/app/modules/ministry_mark/speed_type/speed_type_set/speed_type_set_view.dart';
+import 'package:st/app/modules/ministry_mark/text_commands/text_commands_binding.dart';
+import 'package:st/app/modules/ministry_mark/text_commands/text_commands_view.dart';
 import 'package:st/app/modules/ministry_mark/video_url/video_url_get/video_url_get_binding.dart';
 import 'package:st/app/modules/ministry_mark/video_url/video_url_get/video_url_get_view.dart';
 import 'package:st/app/modules/page_route_aware/bindings/page_route_aware_binding.dart';
@@ -292,6 +294,11 @@ class AppPages {
       name: _Paths.MINISTRY_DATA_RECORD_FILE,
       page: () => const DataRecordFileGetPage(),
       binding: DataRecordFileGetBinding(),
+    ),
+    GetPage(
+      name: _Paths.MINISTRY_TEXT_COMMANDS,
+      page: () => const TextCommandsPage(),
+      binding: TextCommandsBinding(),
     ),
   ];
 }

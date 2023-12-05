@@ -7,13 +7,4 @@ class SpeedTypeSetReqModel extends BaseCommandFrameReqModel {
     super.commandType = 0x6C,
     super.dataLength = 10,
   });
-
-  static void test() {
-    // 一个字节：
-    // 0x1：GPS速度
-    // 0x2：电子速度
-    final model = SpeedTypeSetReqModel(
-      dataBytes: [1],
-    );
-  }
 }

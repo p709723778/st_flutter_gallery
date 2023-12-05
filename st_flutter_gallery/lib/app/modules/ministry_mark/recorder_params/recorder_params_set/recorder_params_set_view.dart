@@ -215,6 +215,30 @@ class RecorderParamsSetPage extends StatelessWidget {
                     },
                   ),
                 ),
+                const SizedBox(height: 10),
+                TextField(
+                  controller: logic.controllerSaltValue,
+                  readOnly: true,
+                  onTap: logic.copySaltValue,
+                  decoration: InputDecoration(
+                    labelText: '数据摘要salt值',
+                    hintText: "数据摘要salt值",
+                    hintStyle: const TextStyle(fontSize: 12),
+                    labelStyle: const TextStyle(fontSize: 12),
+                    suffixIcon: Checkbox(
+                      value: logic.isSetSaltValue,
+                      onChanged: (bool? value) {
+                        logic
+                          ..isSetSaltValue = value!
+                          ..update();
+                      },
+                    ),
+                    border: const OutlineInputBorder(
+                      ///设置边框四个角的弧度
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

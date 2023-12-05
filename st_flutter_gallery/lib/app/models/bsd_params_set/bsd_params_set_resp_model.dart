@@ -69,38 +69,38 @@ class BSDParamsSetRespModel extends BaseCommandFrameRespModel {
   List<Offset> getRectangleA() {
     final rectangleData = respDataBytes.sublist(10, dataLengthResp - 1);
 
-    final a1X = Uint16List.fromList(rectangleData.sublist(0, 2))
+    final a1X = Uint8List.fromList(rectangleData.sublist(0, 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final a1Y = Uint16List.fromList(rectangleData.sublist(2, 2 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final a2X = Uint16List.fromList(rectangleData.sublist(4, 4 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final a2Y = Uint16List.fromList(rectangleData.sublist(6, 6 + 2))
+    final a1Y = Uint8List.fromList(rectangleData.sublist(2, 2 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final a3X = Uint16List.fromList(rectangleData.sublist(8, 8 + 2))
+    final a2X = Uint8List.fromList(rectangleData.sublist(4, 4 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final a3Y = Uint16List.fromList(rectangleData.sublist(10, 10 + 2))
+    final a2Y = Uint8List.fromList(rectangleData.sublist(6, 6 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final a4X = Uint16List.fromList(rectangleData.sublist(12, 12 + 2))
+    final a3X = Uint8List.fromList(rectangleData.sublist(8, 8 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final a4Y = Uint16List.fromList(rectangleData.sublist(14, 14 + 2))
+    final a3Y = Uint8List.fromList(rectangleData.sublist(10, 10 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+
+    final a4X = Uint8List.fromList(rectangleData.sublist(12, 12 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+    final a4Y = Uint8List.fromList(rectangleData.sublist(14, 14 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
@@ -117,38 +117,38 @@ class BSDParamsSetRespModel extends BaseCommandFrameRespModel {
   List<Offset> getRectangleB() {
     final rectangleData = respDataBytes.sublist(10, dataLengthResp - 1);
 
-    final b1X = Uint16List.fromList(rectangleData.sublist(16, 16 + 2))
+    final b1X = Uint8List.fromList(rectangleData.sublist(16, 16 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final b1Y = Uint16List.fromList(rectangleData.sublist(18, 18 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final b2X = Uint16List.fromList(rectangleData.sublist(20, 20 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final b2Y = Uint16List.fromList(rectangleData.sublist(22, 22 + 2))
+    final b1Y = Uint8List.fromList(rectangleData.sublist(18, 18 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final b3X = Uint16List.fromList(rectangleData.sublist(24, 24 + 2))
+    final b2X = Uint8List.fromList(rectangleData.sublist(20, 20 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final b3Y = Uint16List.fromList(rectangleData.sublist(26, 26 + 2))
+    final b2Y = Uint8List.fromList(rectangleData.sublist(22, 22 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final b4X = Uint16List.fromList(rectangleData.sublist(28, 28 + 2))
+    final b3X = Uint8List.fromList(rectangleData.sublist(24, 24 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final b4Y = Uint16List.fromList(rectangleData.sublist(30, 30 + 2))
+    final b3Y = Uint8List.fromList(rectangleData.sublist(26, 26 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+
+    final b4X = Uint8List.fromList(rectangleData.sublist(28, 28 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+    final b4Y = Uint8List.fromList(rectangleData.sublist(30, 30 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
@@ -165,38 +165,38 @@ class BSDParamsSetRespModel extends BaseCommandFrameRespModel {
   List<Offset> getRectangleC() {
     final rectangleData = respDataBytes.sublist(10, dataLengthResp - 1);
 
-    final c1X = Uint16List.fromList(rectangleData.sublist(32, 32 + 2))
+    final c1X = Uint8List.fromList(rectangleData.sublist(32, 32 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final c1Y = Uint16List.fromList(rectangleData.sublist(34, 34 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final c2X = Uint16List.fromList(rectangleData.sublist(36, 36 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final c2Y = Uint16List.fromList(rectangleData.sublist(38, 38 + 2))
+    final c1Y = Uint8List.fromList(rectangleData.sublist(34, 34 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final c3X = Uint16List.fromList(rectangleData.sublist(40, 40 + 2))
+    final c2X = Uint8List.fromList(rectangleData.sublist(36, 36 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final c3Y = Uint16List.fromList(rectangleData.sublist(42, 42 + 2))
+    final c2Y = Uint8List.fromList(rectangleData.sublist(38, 38 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
 
-    final c4X = Uint16List.fromList(rectangleData.sublist(44, 44 + 2))
+    final c3X = Uint8List.fromList(rectangleData.sublist(40, 40 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
-    final c4Y = Uint16List.fromList(rectangleData.sublist(46, 46 + 2))
+    final c3Y = Uint8List.fromList(rectangleData.sublist(42, 42 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+
+    final c4X = Uint8List.fromList(rectangleData.sublist(44, 44 + 2))
+        .buffer
+        .asByteData()
+        .getUint16(0);
+    final c4Y = Uint8List.fromList(rectangleData.sublist(46, 46 + 2))
         .buffer
         .asByteData()
         .getUint16(0);
@@ -208,144 +208,5 @@ class BSDParamsSetRespModel extends BaseCommandFrameRespModel {
       Offset(c4X.toDouble(), c4Y.toDouble()),
     ];
     return list;
-  }
-
-  List getRectangularArea() {
-    final rectangleData = respDataBytes.sublist(10, dataLengthResp - 1);
-
-    final a1X = Uint16List.fromList(rectangleData.sublist(0, 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final a1Y = Uint16List.fromList(rectangleData.sublist(2, 2 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final a2X = Uint16List.fromList(rectangleData.sublist(4, 4 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final a2Y = Uint16List.fromList(rectangleData.sublist(6, 6 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final a3X = Uint16List.fromList(rectangleData.sublist(8, 8 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final a3Y = Uint16List.fromList(rectangleData.sublist(10, 10 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final a4X = Uint16List.fromList(rectangleData.sublist(12, 12 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final a4Y = Uint16List.fromList(rectangleData.sublist(14, 14 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final b1X = Uint16List.fromList(rectangleData.sublist(16, 16 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final b1Y = Uint16List.fromList(rectangleData.sublist(18, 18 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final b2X = Uint16List.fromList(rectangleData.sublist(20, 20 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final b2Y = Uint16List.fromList(rectangleData.sublist(22, 22 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final b3X = Uint16List.fromList(rectangleData.sublist(24, 24 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final b3Y = Uint16List.fromList(rectangleData.sublist(26, 26 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final b4X = Uint16List.fromList(rectangleData.sublist(28, 28 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final b4Y = Uint16List.fromList(rectangleData.sublist(30, 30 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final c1X = Uint16List.fromList(rectangleData.sublist(32, 32 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final c1Y = Uint16List.fromList(rectangleData.sublist(34, 34 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final c2X = Uint16List.fromList(rectangleData.sublist(36, 36 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final c2Y = Uint16List.fromList(rectangleData.sublist(38, 38 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final c3X = Uint16List.fromList(rectangleData.sublist(40, 40 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final c3Y = Uint16List.fromList(rectangleData.sublist(42, 42 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    final c4X = Uint16List.fromList(rectangleData.sublist(44, 44 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-    final c4Y = Uint16List.fromList(rectangleData.sublist(46, 46 + 2))
-        .buffer
-        .asByteData()
-        .getUint16(0);
-
-    return [
-      a1X,
-      a1Y,
-      a2X,
-      a2Y,
-      a3X,
-      a3Y,
-      a4X,
-      a4Y,
-      b1X,
-      b1Y,
-      b2X,
-      b2Y,
-      b3X,
-      b3Y,
-      b4X,
-      b4Y,
-      c1X,
-      c1Y,
-      c2X,
-      c2Y,
-      c3X,
-      c3Y,
-      c4X,
-      c4Y,
-    ];
   }
 }

@@ -45,10 +45,20 @@ class RecorderUniqueNumberModel {
     return result.replaceAll(regExp_Null, '');
   }
 
+  List<int> get lineNumberBytes {
+    final data = recorderUniqueNumberBytes.sublist(26, 26 + 4);
+    return data;
+  }
+
   String get manufacturerName {
     final data = recorderUniqueNumberBytes.sublist(30, 30 + 2);
     final result = String.fromCharCodes(data);
     return result.replaceAll(regExp_Null, '');
+  }
+
+  List<int> get manufacturerNameBytes {
+    final data = recorderUniqueNumberBytes.sublist(30, 30 + 2);
+    return data;
   }
 
   String get productNumber {
@@ -56,5 +66,10 @@ class RecorderUniqueNumberModel {
     final result = String.fromCharCodes(data);
 
     return result.replaceAll(regExp_Null, '');
+  }
+
+  List<int> get productNumberBytes {
+    final data = recorderUniqueNumberBytes.sublist(32, 32 + 3);
+    return data;
   }
 }

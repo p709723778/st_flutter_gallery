@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:st/app/routes/app_pages.dart';
-import 'package:st/config/env_config.dart';
 
 class MinistryMarkPageView extends StatefulWidget {
   const MinistryMarkPageView({super.key});
@@ -42,6 +41,22 @@ class _MinistryMarkPageViewState extends State<MinistryMarkPageView>
                 },
               ),
               ListTile(
+                leading: const Icon(Icons.dataset),
+                title: const Text('数据摘要测试'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Get.toNamed(Routes.MINISTRY_DATA_SUMMARY_TEST);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.textsms),
+                title: const Text('文本指令'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Get.toNamed(Routes.MINISTRY_TEXT_COMMANDS);
+                },
+              ),
+              ListTile(
                 leading: const Icon(Icons.settings_applications),
                 title: const Text('基本参数设置'),
                 trailing: const Icon(Icons.keyboard_arrow_right),
@@ -59,16 +74,8 @@ class _MinistryMarkPageViewState extends State<MinistryMarkPageView>
                   Get.toNamed(Routes.MINISTRY_MARK_BASIC_PARAMETER_GET_VIEW);
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.dataset),
-                title: const Text('数据摘要测试'),
-                trailing: const Icon(Icons.keyboard_arrow_right),
-                onTap: () {
-                  Get.toNamed(Routes.MINISTRY_DATA_SUMMARY_TEST);
-                },
-              ),
             ],
-          ).toList().sublist(0, EnvConfig.isBuildPackage ? 3 : 4),
+          ).toList(),
         ),
       ),
     );

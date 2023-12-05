@@ -65,6 +65,12 @@ class PlatformIpSetLogic extends GetxController {
   @override
   void onClose() {
     _streamSubscription.cancel();
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controllerPort1.dispose();
+    controllerPort2.dispose();
+    controllerPort3.dispose();
     super.onClose();
   }
 

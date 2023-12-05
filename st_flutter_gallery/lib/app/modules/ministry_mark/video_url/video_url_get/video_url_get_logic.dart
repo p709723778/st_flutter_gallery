@@ -49,12 +49,13 @@ class VideoUrlGetLogic extends GetxController {
   void setVideoDataSource1(String url) {
     // url = 'http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8';
     // url = 'rtsp://192.168.80.1:555/live';
-    player.setDataSource(url!, autoPlay: true, showCover: true);
+    player.setDataSource(url, autoPlay: true, showCover: true);
   }
 
   @override
   void onClose() {
     _streamSubscription.cancel();
+    scrollController.dispose();
     player.dispose();
     super.onClose();
   }

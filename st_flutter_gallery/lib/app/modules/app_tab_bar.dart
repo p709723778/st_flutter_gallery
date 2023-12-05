@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:st/app/modules/link_mode/link_mode_select/link_mode_select_view.dart';
 import 'package:st/app/modules/ministry_mark/ministry_mark_page/views/ministry_mark_page_view.dart';
-import 'package:st/app/modules/video_mark/video_mark_page/video_mark_page_view.dart';
 import 'package:st/config/env_config.dart';
 import 'package:st/helpers/logger/logger_helper.dart';
 
@@ -20,7 +19,7 @@ class _AppTabBarState extends State<AppTabBar>
 
   final _tabBarViews = [
     const MinistryMarkPageView(),
-    if (!EnvConfig.isBuildPackage) const VideoMarkPageView(),
+    // const VideoMarkPageView(),
     const LinkModeSelectPage(),
   ];
 
@@ -39,8 +38,7 @@ class _AppTabBarState extends State<AppTabBar>
   Widget build(BuildContext context) {
     final tabItems = [
       TabItem<IconData>(icon: Icons.bookmark, title: '部标'.tr),
-      if (!EnvConfig.isBuildPackage)
-        TabItem<IconData>(icon: Icons.videocam_sharp, title: '视频'.tr),
+      // TabItem<IconData>(icon: Icons.videocam_sharp, title: '视频'.tr),
       TabItem<IconData>(icon: Icons.link, title: '连接'.tr),
     ];
 

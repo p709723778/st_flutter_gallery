@@ -74,7 +74,7 @@ class DriverIcDataModel {
         ListUtil.fixedLenList(driverNo.codeUnits, length: 50 - 32);
 
     /// 姓名
-    final gbkBytesDriverNameEncode = gbk.encode(driverName ?? '');
+    final gbkBytesDriverNameEncode = gbk.encode(driverName);
     final gbkBytesDriverName =
         ListUtil.fixedLenList(gbkBytesDriverNameEncode, length: 82 - 50);
 

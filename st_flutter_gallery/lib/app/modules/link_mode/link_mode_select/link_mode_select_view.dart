@@ -21,110 +21,104 @@ class _LinkModeSelectPageState extends State<LinkModeSelectPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          '连接方式',
-          style: TextStyle(fontSize: 16),
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            '连接方式',
+            style: TextStyle(fontSize: 16),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: GetBuilder<LinkModeSelectLogic>(
-        init: LinkModeSelectLogic(),
-        builder: (logic) {
-          return ListView(
-            children: ListTile.divideTiles(
-              color: Colors.grey, // 分割线的颜色
-              tiles: [
-                ListTile(
-                  leading: const Icon(Icons.info),
-                  title: const Text(
-                    '版本号: ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  trailing: Text(
-                    '${Global.packageInfo?.version}_${Global.packageInfo?.buildNumber}',
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.link_sharp),
-                  title: const Text(
-                    '当前连接方式为: ',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  trailing: Text(
-                    SocketMessageManager.instance.linkType.title,
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.wifi),
-                  // title: RichText(
-                  //   text: const TextSpan(
-                  //     text: 'WIFI连接',
-                  //     style: TextStyle(fontSize: 16, color: Colors.black),
-                  //     children: [],
-                  //   ),
-                  // ),
-                  title: const Text(
-                    'WIFI连接 ',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  trailing: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '(请连接设备热点WIFI)',
-                        style: TextStyle(fontSize: 16, color: Colors.red),
-                      ),
-                      Icon(Icons.keyboard_arrow_right),
-                    ],
-                  ),
-                  onTap: () {
-                    Get.toNamed(Routes.LINK_MODEL_WIFI);
-                  },
-                ),
-                if (GetPlatform.isAndroid)
+        body: GetBuilder<LinkModeSelectLogic>(
+          init: LinkModeSelectLogic(),
+          builder: (logic) {
+            return ListView(
+              children: ListTile.divideTiles(
+                color: Colors.grey, // 分割线的颜色
+                tiles: [
                   ListTile(
-                    leading: const Icon(Icons.bluetooth),
+                    leading: const Icon(Icons.info),
                     title: const Text(
-                      '蓝牙连接客户端模式(Beta)',
+                      '版本号: ',
                       style: TextStyle(fontSize: 14),
                     ),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
-                    onTap: () {
-                      // showToast('努力开发中...');
-                      // return;
-                      Get.toNamed(Routes.BLUETOOTH_SCAN_CLASSIC_PAGE);
-                    },
-                  ),
-                if (GetPlatform.isAndroid)
-                  ListTile(
-                    leading: const Icon(Icons.bluetooth),
-                    title: RichText(
-                      text: const TextSpan(
-                        text: '蓝牙连接服务器模式Beta',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                        children: [
-                          TextSpan(
-                            text: '(请使用手机系统蓝牙进行配对后进行操作)',
-                            style: TextStyle(fontSize: 16, color: Colors.red),
-                          ),
-                        ],
-                      ),
+                    trailing: Text(
+                      '${Global.packageInfo?.version}_${Global.packageInfo?.buildNumber}',
+                      style: const TextStyle(fontSize: 14),
                     ),
-                    trailing: const Icon(Icons.keyboard_arrow_right),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.link_sharp),
+                    title: const Text(
+                      '当前连接方式为: ',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    trailing: Text(
+                      SocketMessageManager.instance.linkType.title,
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.wifi),
+                    title: const Text(
+                      'WIFI连接 ',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    trailing: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '(请连接设备热点WIFI)',
+                          style: TextStyle(fontSize: 16, color: Colors.red),
+                        ),
+                        Icon(Icons.keyboard_arrow_right),
+                      ],
+                    ),
                     onTap: () {
-                      // showToast('努力开发中...');
-                      // return;
-                      Get.toNamed(Routes.BLUETOOTH_SCAN_CLASSIC_SERVER_PAGE);
+                      Get.toNamed(Routes.LINK_MODEL_WIFI);
                     },
                   ),
-              ],
-            ).toList().sublist(0, 3),
-          );
-        },
+                  if (GetPlatform.isAndroid)
+                    ListTile(
+                      leading: const Icon(Icons.bluetooth),
+                      title: RichText(
+                        text: const TextSpan(
+                          text: '蓝牙连接',
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          children: [
+                            TextSpan(
+                              text: '(请使用手机系统蓝牙进行配对后进行操作)',
+                              style: TextStyle(fontSize: 16, color: Colors.red),
+                            ),
+                          ],
+                        ),
+                      ),
+                      trailing: const Icon(Icons.keyboard_arrow_right),
+                      onTap: () {
+                        Get.toNamed(Routes.BLUETOOTH_SCAN_CLASSIC_SERVER_PAGE);
+                      },
+                    ),
+                  // if (GetPlatform.isAndroid)
+                  //   ListTile(
+                  //     leading: const Icon(Icons.bluetooth),
+                  //     title: const Text(
+                  //       '蓝牙连接客户端模式(Beta)',
+                  //       style: TextStyle(fontSize: 16),
+                  //     ),
+                  //     trailing: const Icon(Icons.keyboard_arrow_right),
+                  //     onTap: () {
+                  //       Get.toNamed(Routes.BLUETOOTH_SCAN_CLASSIC_PAGE);
+                  //     },
+                  //   ),
+                ],
+              ).toList(),
+            );
+          },
+        ),
       ),
     );
   }

@@ -47,7 +47,7 @@ class _BluetoothScanClassicListViewState
                         .bondDeviceAtAddress(r.device.address);
                   }
                 } on Exception catch (ex) {
-                  logger.severe('长按匹配或取消匹配失败');
+                  logger.severe('长按匹配或取消匹配失败:$ex');
                 }
               },
             ),

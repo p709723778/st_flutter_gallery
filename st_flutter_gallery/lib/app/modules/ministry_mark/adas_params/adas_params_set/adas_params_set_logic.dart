@@ -81,6 +81,15 @@ class AdasParamsSetLogic extends GetxController {
   void onClose() {
     mkPlayer.dispose();
     _streamSubscription.cancel();
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controller4.dispose();
+    controller5.dispose();
+    controller6.dispose();
+    controller7.dispose();
+    controller8.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 
@@ -171,7 +180,6 @@ class AdasParamsSetLogic extends GetxController {
       showToast('请输入车长');
       return;
     }
-
     final carWidth = int.parse(controller1.text);
     final cameraAndVehicle = int.parse(controller2.text);
     final cameraBeforeArrives = int.parse(controller3.text);
@@ -208,7 +216,6 @@ class AdasParamsSetLogic extends GetxController {
 
     /// 车长
     final carChiefByteData = ByteData(2)..setUint16(0, carChief);
-
     final data = [
       ...carWidthByteData.buffer.asUint8List(),
       ...cameraAndVehicleByteData.buffer.asUint8List(),

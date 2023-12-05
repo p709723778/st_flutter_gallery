@@ -106,6 +106,11 @@ class CarParamsSetLogic extends GetxController {
   @override
   void onClose() {
     _streamSubscription.cancel();
+    controllerManufacturerId.dispose();
+    controllerTerminalMode.dispose();
+    controllerTerminalId.dispose();
+    controllerCarNumber.dispose();
+
     super.onClose();
   }
 
@@ -131,7 +136,7 @@ class CarParamsSetLogic extends GetxController {
       if (city != null) {
         cityList
           ..clear()
-          ..addAll(province?.districts ?? []);
+          ..addAll(province.districts);
         selectedDistricts = city;
       }
     }

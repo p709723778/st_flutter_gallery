@@ -116,9 +116,14 @@ class BsdParamsSetLogic extends GetxController {
 
   @override
   void onClose() {
-    // player.dispose();
     mkPlayer.dispose();
     _streamSubscription.cancel();
+    controller1.dispose();
+    controller2.dispose();
+    controller3.dispose();
+    controller4.dispose();
+    controller5.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 

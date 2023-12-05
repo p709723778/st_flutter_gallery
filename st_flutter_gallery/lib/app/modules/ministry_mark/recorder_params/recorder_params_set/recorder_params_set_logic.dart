@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +15,7 @@ import 'package:st/extension/string_extension.dart';
 import 'package:st/helpers/logger/logger_helper.dart';
 import 'package:st/utils/bcd_data/bcd_data_util.dart';
 import 'package:st/utils/byte/byte_string_util.dart';
+import 'package:st/utils/byte/bytes_data_util.dart';
 import 'package:st/utils/encrypt/sm4_ebc.dart';
 import 'package:st/utils/list/list_util.dart';
 
@@ -25,6 +26,7 @@ class RecorderParamsSetLogic extends GetxController {
   bool isSetSerialNumber = false;
   bool isSetImpulseCoefficient = false;
   bool isSetFirstInstallDate = false;
+  bool isSetSaltValue = false;
 
   final TextEditingController controllerCarNumber = TextEditingController();
   final TextEditingController controllerCarCategory = TextEditingController();
@@ -32,8 +34,10 @@ class RecorderParamsSetLogic extends GetxController {
   final TextEditingController controllerSerialNumber = TextEditingController();
   final TextEditingController controllerImpulseCoefficient =
       TextEditingController();
+  final TextEditingController controllerSaltValue = TextEditingController();
 
-  late StreamSubscription _streamSubscription;
+  late StreamSubscription _streamSubscriptionSend;
+  late StreamSubscription _streamSubscriptionReceive;
 
   /// 采集查询到的实体
   RecorderParamsGetRespModel? recorderParamsGetRespModel;
@@ -41,9 +45,11 @@ class RecorderParamsSetLogic extends GetxController {
   /// 首次安装时间
   DateTime? firstInstallDateTime;
 
+  late final List<int>? encryptOutArray;
+
   @override
   void onInit() {
-    _streamSubscription = SocketMessageManager.instance
+    _streamSubscriptionReceive = SocketMessageManager.instance
         .on<RecorderParamsGetRespModel>()
         .listen((event) {
       if (event.fixedString.hasValue) {
@@ -60,7 +66,7 @@ class RecorderParamsSetLogic extends GetxController {
         final format = DateFormat("yy年MM月dd日HH时mm分ss秒");
         firstInstallDateTime =
             format.parse(recorderParamsGetRespModel!.firstInstallDate);
-
+        _initSaltValue();
         showToast('采集记录仪信息成功');
         update();
       } else {
@@ -69,7 +75,7 @@ class RecorderParamsSetLogic extends GetxController {
       EasyLoading.dismiss();
     });
 
-    _streamSubscription = SocketMessageManager.instance
+    _streamSubscriptionSend = SocketMessageManager.instance
         .on<RecorderParamsSetRespModel>()
         .listen((event) {
       EasyLoading.dismiss();
@@ -81,13 +87,60 @@ class RecorderParamsSetLogic extends GetxController {
       update();
     });
     search();
+
     super.onInit();
   }
 
   @override
   void onClose() {
-    _streamSubscription.cancel();
+    _streamSubscriptionSend.cancel();
+    _streamSubscriptionReceive.cancel();
+    controllerCarNumber.dispose();
+    controllerCarCategory.dispose();
+    controllerVin.dispose();
+    controllerSerialNumber.dispose();
+    controllerImpulseCoefficient.dispose();
     super.onClose();
+  }
+
+  void _initSaltValue() {
+    /// 组装后的字节
+    final saltRNBytes = [
+      ...BytesDataUtil.convertFixedLenBytes(
+        recorderParamsGetRespModel!
+            .recorderUniqueNumberModel.manufacturerNameBytes,
+        length: 2,
+      ),
+      ...BytesDataUtil.convertFixedLenBytes(
+        recorderParamsGetRespModel!
+            .recorderUniqueNumberModel.productNumberBytes,
+        length: 3,
+      ),
+      ...BytesDataUtil.convertFixedLenBytes(
+        recorderParamsGetRespModel!.recorderUniqueNumberModel.lineNumberBytes,
+        length: 4,
+      ),
+      ...BytesDataUtil.convertFixedLenBytes(
+        [],
+        length: 7,
+      ),
+    ];
+
+    final saltRNHexString = saltRNBytes
+        .map(
+          (int byte) => byte.toRadixString(16).padLeft(2, '0'),
+        )
+        .join();
+
+    encryptOutArray = Sm4EBC.encryptOutArray(saltRNHexString);
+    final encryptOutArrayHexString = encryptOutArray
+        ?.map(
+          (int byte) => byte.toRadixString(16).padLeft(2, '0'),
+        )
+        .join()
+        .toUpperCase();
+
+    controllerSaltValue.text = encryptOutArrayHexString ?? '';
   }
 
   void done() {
@@ -96,14 +149,19 @@ class RecorderParamsSetLogic extends GetxController {
     final carCategory = controllerCarCategory.text;
     final vin = controllerVin.text;
     final serialNumber = controllerSerialNumber.text;
+    final saltValue = controllerSaltValue.text;
     int? impulseCoefficient;
     if (controllerImpulseCoefficient.text.isNotEmpty) {
       impulseCoefficient = int.parse(controllerImpulseCoefficient.text);
     }
 
-    if ((carNumber.isEmpty && carCategory.isEmpty) &&
-        (vin.isEmpty && serialNumber.isEmpty) &&
-        (impulseCoefficient == null && firstInstallDateTime == null)) {
+    if (carNumber.isEmpty &&
+        carCategory.isEmpty &&
+        vin.isEmpty &&
+        serialNumber.isEmpty &&
+        impulseCoefficient == null &&
+        firstInstallDateTime == null &&
+        saltValue.isEmpty) {
       showToast('请至少输入一项');
       return;
     }
@@ -112,7 +170,8 @@ class RecorderParamsSetLogic extends GetxController {
         !isSetVin &&
         !isSetSerialNumber &&
         !isSetImpulseCoefficient &&
-        !isSetFirstInstallDate) {
+        !isSetFirstInstallDate &&
+        !isSetSaltValue) {
       showToast('至少选择一项进行设置');
       return;
     }
@@ -139,41 +198,12 @@ class RecorderParamsSetLogic extends GetxController {
     if (isSetSerialNumber) {
       setFlagValue |= flag4;
     }
+
     if (isSetFirstInstallDate) {
       setFlagValue |= flag3;
     }
 
-    /// 组装后的字节
-    final saltBytes = [
-      ...ByteStringUtil.convertFixedLenBytes(
-        recorderParamsGetRespModel
-                ?.recorderUniqueNumberModel.manufacturerName ??
-            '',
-        length: 2,
-      ),
-      ...ByteStringUtil.convertFixedLenBytes(
-        recorderParamsGetRespModel?.recorderUniqueNumberModel.productNumber ??
-            '',
-        length: 3,
-      ),
-      ...ByteStringUtil.convertFixedLenBytes(
-        recorderParamsGetRespModel?.recorderUniqueNumberModel.lineNumber ?? '',
-        length: 4,
-      ),
-      ...ByteStringUtil.convertFixedLenBytes(
-        '',
-        length: 7,
-      ),
-    ];
-
-    final saltHexString = saltBytes
-        .map(
-          (int byte) => byte.toRadixString(16).padLeft(2, ''),
-        )
-        .join();
-
-    final salt = Sm4EBC.encrypt(saltHexString);
-    if (salt.isNotEmpty) {
+    if (isSetSaltValue) {
       setFlagValue |= flag2;
     }
 
@@ -202,7 +232,9 @@ class RecorderParamsSetLogic extends GetxController {
     final installDateBytes =
         BcdDataUtil.getDeviceDateTimeBcdBytes(dateTime: firstInstallDateTime);
 
-    final saltEncryptBytes = ByteStringUtil.convertFixedLenBytes(salt);
+    if (encryptOutArray?.isEmpty ?? true) {
+      encryptOutArray = List.filled(16, 0);
+    }
 
     final dataBytes = [
       ...flagValueBytes,
@@ -213,7 +245,7 @@ class RecorderParamsSetLogic extends GetxController {
       ...serialNumberBytes,
       ...impulseCoefficientBytes,
       ...installDateBytes,
-      ...saltEncryptBytes,
+      ...encryptOutArray!,
     ];
 
     final reqModel = RecorderParamsSetReqModel(dataBytes: dataBytes);
@@ -247,5 +279,11 @@ class RecorderParamsSetLogic extends GetxController {
   void setInstallDate(DateTime date) {
     firstInstallDateTime = date;
     update();
+  }
+
+  void copySaltValue() {
+    if (controllerSaltValue.text.noValue) return;
+    Clipboard.setData(ClipboardData(text: controllerSaltValue.text ?? ''));
+    showToast('复制内容成功');
   }
 }

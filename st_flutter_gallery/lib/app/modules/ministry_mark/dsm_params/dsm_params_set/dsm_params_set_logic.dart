@@ -70,6 +70,7 @@ class DsmParamsSetLogic extends GetxController {
   @override
   void onClose() {
     _streamSubscription.cancel();
+    mkPlayer.dispose();
     super.onClose();
   }
 

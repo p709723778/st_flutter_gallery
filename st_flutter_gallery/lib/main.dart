@@ -38,48 +38,48 @@ Future<void> main() async {
 
   await ServicesManager.initServices();
 
-  unawaited(
-    [
+  if (GetPlatform.isAndroid) {
+    await [
       // Permission.location,
       // Permission.storage,
-      // Permission.bluetooth,
-      // Permission.bluetoothConnect,
-      // Permission.bluetoothScan,
+      Permission.bluetooth,
+      Permission.bluetoothConnect,
+      Permission.bluetoothScan,
       Permission.videos,
       Permission.audio,
       // Permission.manageExternalStorage,
       // Permission.nearbyWifiDevices
-    ].request().then((status) {
-      if (kDebugMode) {
-        PluginManager.instance // 注册插件
-          ..register(const WidgetInfoInspector())
-          ..register(const WidgetDetailInspector())
-          ..register(const ColorSucker())
-          ..register(AlignRuler())
-          ..register(const ColorPicker()) // 新插件
-          ..register(const TouchIndicator()) // 新插件
-          ..register(Performance())
-          ..register(const ShowCode())
-          ..register(const MemoryInfoPage())
-          ..register(CpuInfoPage())
-          ..register(const DeviceInfoPanel())
-          ..register(Console())
-          ..register(DioInspector(dio: Http.networkHelper.dio)); // 传入你的 Dio 实例
-        // flutter_ume 0.3.0 版本之后
-        runApp(
-          ValueListenableBuilder<bool>(
-            valueListenable: EnvConfig.isEnableUME,
-            builder: (context, enable, child) {
-              return UMEWidget(enable: enable, child: const MyApp());
-            },
-          ),
-        ); // 初始化
-        // / 初始化
-      } else {
-        runApp(const MyApp());
-      }
-    }),
-  );
+    ].request();
+  }
+
+  if (kDebugMode) {
+    PluginManager.instance // 注册插件
+      ..register(const WidgetInfoInspector())
+      ..register(const WidgetDetailInspector())
+      ..register(const ColorSucker())
+      ..register(AlignRuler())
+      ..register(const ColorPicker()) // 新插件
+      ..register(const TouchIndicator()) // 新插件
+      ..register(Performance())
+      ..register(const ShowCode())
+      ..register(const MemoryInfoPage())
+      ..register(CpuInfoPage())
+      ..register(const DeviceInfoPanel())
+      ..register(Console())
+      ..register(DioInspector(dio: Http.networkHelper.dio)); // 传入你的 Dio 实例
+    // flutter_ume 0.3.0 版本之后
+    runApp(
+      ValueListenableBuilder<bool>(
+        valueListenable: EnvConfig.isEnableUME,
+        builder: (context, enable, child) {
+          return UMEWidget(enable: enable, child: const MyApp());
+        },
+      ),
+    ); // 初始化
+    // / 初始化
+  } else {
+    runApp(const MyApp());
+  }
 }
 
 class MyApp extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:let_log/let_log.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:st/app/manager/bluetooth_socket_classic_manager.dart';
@@ -34,6 +35,7 @@ import 'package:st/app/models/recorder_test/recorder_test_set_resp_model.dart';
 import 'package:st/app/models/self_test_status/self_test_status_get_resp_model.dart';
 import 'package:st/app/models/speed_type/speed_type_get_resp_model.dart';
 import 'package:st/app/models/speed_type/speed_type_set_resp_model.dart';
+import 'package:st/app/models/text_commands/text_commands_get_resp_model.dart';
 import 'package:st/app/models/video_url/video_url_get_resp_model.dart';
 import 'package:st/helpers/logger/logger_helper.dart';
 import 'package:st/utils/loading/loading_util.dart';
@@ -88,6 +90,7 @@ class SocketMessageManager extends EventBus {
   /// 发送消息
   void sendMessage(List<int> data, {bool isToast = true}) {
     try {
+      _commandTestCode();
       if (!SwitchOnModel.isPass) {
         logger.info('程序逻辑出错');
         return;
@@ -207,11 +210,143 @@ class SocketMessageManager extends EventBus {
         model = Apn4gSetRespModel(respDataBytes: rawData);
       } else if (commandType == DataRecordFileGetRespModel.commandTypeRespTag) {
         model = DataRecordFileGetRespModel(respDataBytes: rawData);
+      } else if (commandType == TextCommandsGetRespModel.commandTypeRespTag) {
+        model = TextCommandsGetRespModel(respDataBytes: rawData);
       }
 
       if (model != null) {
         fire(model);
       }
     }
+  }
+
+  void _commandTestCode() {
+    return;
+    final data = [
+      57,
+      0x78,
+      0xB1,
+      0x00,
+      0x79,
+      0x00,
+      0x00,
+      0x03,
+      0x47,
+      0x42,
+      0x54,
+      0x31,
+      0x39,
+      0x30,
+      0x35,
+      0x36,
+      0x21,
+      0x00,
+      0x23,
+      0x12,
+      0x01,
+      0x14,
+      0x30,
+      0x32,
+      0x43,
+      0x30,
+      0x30,
+      0x30,
+      0x35,
+      0x32,
+      0x34,
+      0x53,
+      0x45,
+      0x47,
+      0x2D,
+      0x39,
+      0x38,
+      0x38,
+      0x38,
+      0x56,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x23,
+      0x08,
+      0x07,
+      0x10,
+      0x10,
+      0x10,
+      0x10,
+      0x53,
+      0x47,
+      0x39,
+      0x38,
+      0x56,
+      0xD4,
+      0xC1,
+      0x42,
+      0x35,
+      0x34,
+      0x33,
+      0x32,
+      0x31,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0xBB,
+      0xF5,
+      0xB3,
+      0xB5,
+      0x20,
+      0x20,
+      0x20,
+      0x20,
+      0x20,
+      0x20,
+      0x20,
+      0x20,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x41,
+      0x4A,
+      0x42,
+      0x4B,
+      0x4C,
+      0x47,
+      0x44,
+      0x43,
+      0x42,
+      0x45,
+      0x58,
+      0x57,
+      0x5A,
+      0x56,
+      0x46,
+      0x4D,
+      0x59,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x00,
+      0x0E,
+      0x10,
+      0x23,
+      0x08,
+      0x10,
+      0x12,
+      0x00,
+      0x00,
+      0xCC,
+    ];
+    Future.delayed(3.seconds, () {
+      subscriptionMessage(data);
+    });
   }
 }

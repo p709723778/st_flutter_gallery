@@ -22,6 +22,7 @@ final _primarySwatch = MaterialColor(
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: _stPrimaryColor,
+  useMaterial3: false,
   appBarTheme: const AppBarTheme(
     centerTitle: true,
   ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RectanglePainter extends CustomPainter {
-  RectanglePainter(this.points, {this.color});
+  RectanglePainter(this.points, {this.color, this.strokeWidth = 1});
   List<Offset> points;
   final Color? color;
+  final double? strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -11,7 +12,7 @@ class RectanglePainter extends CustomPainter {
       ..color = color ?? Colors.blue
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.square
-      ..strokeWidth = 1.0;
+      ..strokeWidth = strokeWidth ?? 1.0;
 
     final path = Path()
       ..moveTo(points[0].dx, points[0].dy)

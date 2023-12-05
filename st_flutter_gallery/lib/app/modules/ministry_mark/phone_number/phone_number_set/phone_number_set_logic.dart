@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -13,16 +12,6 @@ import 'package:st/app/models/phone_number/phone_number_set_resp_model.dart';
 import 'package:st/extension/string_extension.dart';
 import 'package:st/helpers/logger/logger_helper.dart';
 import 'package:st/utils/bcd_data/bcd_data_util.dart';
-import 'package:st/utils/encrypt/sm4_ebc.dart';
-
-const int z1 = 0x01;
-const int z2 = 0x02;
-const int z3 = 0x04;
-const int z4 = 0x08;
-const int z5 = 0x10;
-const int z6 = 0x20;
-const int z7 = 0x40;
-const int z8 = 0x80;
 
 class PhoneNumberSetLogic extends GetxController {
   final TextEditingController controller1 = TextEditingController();
@@ -57,27 +46,15 @@ class PhoneNumberSetLogic extends GetxController {
       update();
     });
 
-    const data = 'Hello! SM-CRYPTO @greenking19';
-
-    Sm4EBC.encrypt(data);
     search();
-    var value = 0;
-    value |= z1;
-    value |= z2;
-    // value |= z3;
-    // value |= z4;
-    // value |= z5;
-    // value |= z6;
-    // value |= z7;
-    value |= z8;
 
-    final data16 = Uint16List.fromList([value]);
     super.onInit();
   }
 
   @override
   void onClose() {
     _streamSubscription.cancel();
+    controller1.dispose();
     super.onClose();
   }
 

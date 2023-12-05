@@ -7,7 +7,6 @@ import 'package:st/app/constants/number_key.dart';
 import 'package:st/app/manager/socket_message_manager.dart';
 import 'package:st/app/models/video_url/video_url_get_req_model.dart';
 import 'package:st/app/modules/ministry_mark/bsd_params/bsd_params_set/bsd_params_set_logic.dart';
-import 'package:st/config/env_config.dart';
 import 'package:st/utils/text_input_formatter/text_input_formatter_util.dart';
 
 class BsdParamsSetPage extends StatelessWidget {
@@ -117,8 +116,7 @@ class BsdParamsSetPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        if (logic.dropdownIndex == VideoUrlType.bsd.value &&
-                            !EnvConfig.isBuildPackage) ...[
+                        if (logic.dropdownIndex == VideoUrlType.bsd.value) ...[
                           if (logic.rectangleA.isNotEmpty)
                             Positioned.fill(
                               child: AspectRatio(
@@ -128,7 +126,7 @@ class BsdParamsSetPage extends StatelessWidget {
                                   child: CustomPaint(
                                     painter: RectanglePainter(
                                       logic.rectangleA,
-                                      color: Colors.red.withOpacity(0.8),
+                                      color: Colors.red,
                                     ),
                                     // size: const Size(100, 100),
                                   ),
@@ -144,7 +142,7 @@ class BsdParamsSetPage extends StatelessWidget {
                                   child: CustomPaint(
                                     painter: RectanglePainter(
                                       logic.rectangleB,
-                                      color: Colors.yellow.withOpacity(0.8),
+                                      color: Colors.yellow,
                                     ),
                                     // size: const Size(100, 100),
                                   ),
@@ -160,7 +158,7 @@ class BsdParamsSetPage extends StatelessWidget {
                                   child: CustomPaint(
                                     painter: RectanglePainter(
                                       logic.rectangleC,
-                                      color: Colors.blue.withOpacity(0.8),
+                                      color: Colors.blue,
                                     ),
                                     // size: const Size(100, 100),
                                   ),
