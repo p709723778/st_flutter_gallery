@@ -1,6 +1,6 @@
 class Apis {
-  static const login = "/login";
-  static const test = "/test";
+  // 登录接口
+  static const login = "/appLogin";
 
   /// 开关配置
   static const project_settings =

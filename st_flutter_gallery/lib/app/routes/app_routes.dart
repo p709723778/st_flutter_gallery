@@ -68,6 +68,7 @@ abstract class Routes {
   static const MINISTRY_DATA_SUMMARY_TEST = _Paths.MINISTRY_DATA_SUMMARY_TEST;
   static const MINISTRY_DATA_RECORD_FILE = _Paths.MINISTRY_DATA_RECORD_FILE;
   static const MINISTRY_TEXT_COMMANDS = _Paths.MINISTRY_TEXT_COMMANDS;
+  static const LOGIN_PAGE = _Paths.LOGIN_PAGE;
 }
 
 abstract class _Paths {
@@ -123,4 +124,5 @@ abstract class _Paths {
   static const MINISTRY_DATA_SUMMARY_TEST = '/data-summary-test-view';
   static const MINISTRY_DATA_RECORD_FILE = '/data-record-file-view';
   static const MINISTRY_TEXT_COMMANDS = '/text-commands-view';
+  static const LOGIN_PAGE = '/login-page';
 }

@@ -15,6 +15,8 @@ import 'package:st/app/modules/link_mode/link_mode_select/link_mode_select_bindi
 import 'package:st/app/modules/link_mode/link_mode_select/link_mode_select_view.dart';
 import 'package:st/app/modules/link_mode/wifi/wifi_binding.dart';
 import 'package:st/app/modules/link_mode/wifi/wifi_view.dart';
+import 'package:st/app/modules/login/user_login_binding.dart';
+import 'package:st/app/modules/login/user_login_view.dart';
 import 'package:st/app/modules/ministry_mark/adas_params/adas_params_set/adas_params_set_binding.dart';
 import 'package:st/app/modules/ministry_mark/adas_params/adas_params_set/adas_params_set_view.dart';
 import 'package:st/app/modules/ministry_mark/alarm_sound/alarm_sound_set/alarm_sound_set_binding.dart';
@@ -299,6 +301,11 @@ class AppPages {
       name: _Paths.MINISTRY_TEXT_COMMANDS,
       page: () => const TextCommandsPage(),
       binding: TextCommandsBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN_PAGE,
+      page: () => const UserLoginPage(),
+      binding: UserLoginBinding(),
     ),
   ];
 }

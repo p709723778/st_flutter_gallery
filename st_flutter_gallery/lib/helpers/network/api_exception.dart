@@ -25,8 +25,9 @@ class ApiException implements Exception {
         try {
           /// http错误码带业务错误信息
           final apiResponse = ApiResponseModel.fromJson(error.response?.data);
-          if (apiResponse.code != null) {
-            return ApiException(apiResponse.code, apiResponse.message);
+          if (apiResponse.errorCode != null) {
+            return ApiException(
+                apiResponse.errorCode, apiResponse.errorMessage);
           }
 
           final errCode = error.response?.statusCode;

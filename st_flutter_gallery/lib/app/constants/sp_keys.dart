@@ -8,4 +8,7 @@ class SpKeys {
   static const networkEnvCustom = '${_prefix}networkEnvCustom';
   static const isLamentGrey = '${_prefix}isLamentGrey';
   static const isAgreePrivacyPolicy = '${_prefix}isAgreePrivacyPolicy';
+  static const userName = '${_prefix}userName';
+  static const passWord = '${_prefix}passWord';
+  static const loginInfoExpirationTime = '${_prefix}loginInfoExpirationTime';
 }

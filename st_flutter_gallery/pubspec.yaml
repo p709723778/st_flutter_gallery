@@ -37,7 +37,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  intl: ^0.18.1
+  intl: ^0.19.0
   # 状态管理 / 国际化 / 路由等
   get: ^4.6.6
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
@@ -71,7 +71,7 @@ dependencies:
   # 日期格式化库
   date_format: ^2.0.7
   # 图片选择器(备选: multi_image_picker: ^4.8.0)
-  image_picker: ^1.0.4
+  image_picker: ^1.0.5
   # 网络连接状态
   connectivity_plus: ^5.0.2
   # 唯一标识符
@@ -104,13 +104,13 @@ dependencies:
   # toast提示
   oktoast: ^3.4.0
   # 上下拉刷新加载
-  easy_refresh: ^3.3.2+4
+  easy_refresh: ^3.3.3+1
   # 字符集
   characters: ^1.3.0
   # 文件路径
   path_provider: ^2.1.1
   # 路径操作库
-  path: ^1.8.3
+  path: ^1.9.0
   # 主题管理
   adaptive_theme: ^3.4.1
   # 滑动开关控件
@@ -185,7 +185,7 @@ dependencies:
   # 组件跟随键盘消失 / 显示
   keyboard_attachable: ^2.2.0
   # 用于 schemes 跳转
-  url_launcher: ^6.2.1
+  url_launcher: ^6.2.2
   # 数字格式处理
   decimal: ^2.3.3
   # 悬浮拖动
@@ -193,7 +193,7 @@ dependencies:
   # 图片轮播, 有圆点索引
   card_swiper: ^3.0.1
   # 可配置的收缩expansion_tile
-  configurable_expansion_tile_null_safety: ^3.3.1
+  configurable_expansion_tile_null_safety: ^3.3.2
   # Android 隐私合规-剪切版功能
   flutter_clipbord_conformance: ^0.0.4
   # icon 角标数字
@@ -212,7 +212,7 @@ dependencies:
   media_kit_libs_video: ^1.0.4                   # Native video dependencies.
   fijkplayer: ^0.11.0
   # 蓝牙(低功率LE)
-  flutter_blue_plus: ^1.29.8
+  flutter_blue_plus: ^1.30.5
   flutter_bluetooth_serial:
     git:
       url: https://gitee.com/p709723778/flutter_bluetooth_serial.git
@@ -251,7 +251,7 @@ dev_dependencies:
   rename: ^3.0.1
   # 统一修改启动页
   #  flutter pub run flutter_native_splash:create --path=yaml/flutter_native_splash.yaml
-  flutter_native_splash: ^2.3.6
+  flutter_native_splash: ^2.3.8
   # 统一修改 App Icon
   # 命令如下
   # flutter pub run flutter_launcher_icons:main -f yaml/flutter_launcher_icons.yaml
@@ -260,18 +260,18 @@ dev_dependencies:
 
   # 字节跳动的调试工具
   flutter_ume_plus: ^3.0.0
-  flutter_ume_kit_dio_plus: ^3.4.2
+  flutter_ume_kit_dio_plus: ^3.4.4
   flutter_ume_kit_show_code_plus: ^3.0.0
   flutter_ume_kit_device_plus: ^2.0.0
-  flutter_ume_kit_console_plus: ^2.0.0
+  flutter_ume_kit_console_plus: ^2.0.1
   flutter_ume_kit_perf_plus: ^2.0.0
   flutter_ume_kit_channel_monitor_plus: ^2.0.0
   flutter_ume_kit_ui_plus: ^2.0.0
 
 dependency_overrides:
-  vm_service: ^13.0.0
-  path: ^1.8.3
-  intl: ^0.18.1
+  vm_service: ^14.0.0
+  path: ^1.9.0
+  intl: ^0.19.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -287,8 +287,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/icons/app_icon/
-    - assets/images/main/
     - assets/json/
+    - assets/images/launch_bg/
+    - assets/images/main/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

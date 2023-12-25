@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shake/shake.dart';
 import 'package:st/app/manager/area_city/area_city_manager.dart';
-import 'package:st/app/models/api_response/switch_on_model.dart';
 import 'package:st/common/global.dart';
 import 'package:st/config/env_config.dart';
 import 'package:st/helpers/debug_settings/debug_settings_view.dart';
@@ -22,7 +21,6 @@ class ServicesManager {
 
     /******** 分割线以上需要先初始化 ********/
 
-    unawaited(SwitchOnModel.requestSwitchOn());
     if (GetPlatform.isMobile) {
       ShakeDetector.autoStart(onPhoneShake: DebugSettingsPage.show);
     } else if (GetPlatform.isDesktop && kDebugMode) {

@@ -6,6 +6,8 @@ import 'package:let_log/let_log.dart';
 import 'package:st/config/env_config.dart';
 import 'package:st/helpers/debug_settings/debug_settings_binding.dart';
 import 'package:st/helpers/debug_settings/debug_settings_logic.dart';
+import 'package:st/helpers/debug_settings/proxy_setting/proxy_setting_binding.dart';
+import 'package:st/helpers/debug_settings/proxy_setting/proxy_setting_view.dart';
 
 class DebugSettingsPage extends StatefulWidget {
   const DebugSettingsPage({super.key});
@@ -87,39 +89,39 @@ class _DebugSettingsState extends State<DebugSettingsPage> {
               //   ),
               // ),
               // const SizedBox(height: 14),
-              // Container(
-              //   padding: const EdgeInsets.symmetric(vertical: 4),
-              //   decoration: BoxDecoration(
-              //     color: Get.theme.colorScheme.background,
-              //     borderRadius: BorderRadius.circular(8),
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color: Get.theme.shadowColor,
-              //         blurRadius: 7.5,
-              //       ),
-              //     ],
-              //   ),
-              //   child: ListTile(
-              //     title: const Text(
-              //       '代理设置',
-              //       style: TextStyle(fontSize: 14),
-              //     ),
-              //     leading: Icon(
-              //       Icons.pan_tool_rounded,
-              //       color: Get.theme.primaryColor,
-              //     ),
-              //     trailing: Icon(
-              //       Icons.keyboard_arrow_right,
-              //       color: Get.theme.primaryColor,
-              //     ),
-              //     onTap: () {
-              //       Get.to(
-              //         const ProxySettingPage(),
-              //         binding: ProxySettingBinding(),
-              //       );
-              //     },
-              //   ),
-              // ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                decoration: BoxDecoration(
+                  color: Get.theme.colorScheme.background,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Get.theme.shadowColor,
+                      blurRadius: 7.5,
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: const Text(
+                    '代理设置',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  leading: Icon(
+                    Icons.pan_tool_rounded,
+                    color: Get.theme.primaryColor,
+                  ),
+                  trailing: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Get.theme.primaryColor,
+                  ),
+                  onTap: () {
+                    Get.to(
+                      const ProxySettingPage(),
+                      binding: ProxySettingBinding(),
+                    );
+                  },
+                ),
+              ),
               // const SizedBox(height: 14),
               // Container(
               //   padding: const EdgeInsets.symmetric(vertical: 4),
@@ -155,7 +157,7 @@ class _DebugSettingsState extends State<DebugSettingsPage> {
               //     ),
               //   ),
               // ),
-              // const SizedBox(height: 14),
+              const SizedBox(height: 14),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 decoration: BoxDecoration(

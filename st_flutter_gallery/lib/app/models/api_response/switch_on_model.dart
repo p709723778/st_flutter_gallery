@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
 import 'package:st/app/network_request/apis/apis.dart';
 import 'package:st/helpers/logger/logger_helper.dart';
 
@@ -24,15 +23,6 @@ class SwitchOnModel {
 
   /// 是否通过
   static bool get isPass {
-    final now = DateTime.now();
-
-    final inputFormat = DateFormat('yy-MM-dd HH:mm:ss');
-    final dateTime = inputFormat.parse('2024-6-25 23:59:59');
-
-    if (now.isAfter(dateTime)) {
-      return false;
-    }
-
     if (_switchOnModel.switchOn != 1) {
       return true;
     }

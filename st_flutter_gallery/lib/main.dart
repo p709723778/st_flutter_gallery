@@ -17,7 +17,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:st/app/lang/translation_service.dart';
-import 'package:st/app/modules/app_tab_bar.dart';
+import 'package:st/app/modules/login/user_login_view.dart';
 import 'package:st/app/network_request/http.dart';
 import 'package:st/app/routes/app_pages.dart';
 import 'package:st/app/themes/themes.dart';
@@ -88,8 +88,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    const tabBar = AppTabBar();
-    final body = buildGetMaterialApp(home: tabBar);
+    const login = UserLoginPage();
+    final body = buildGetMaterialApp(home: login);
 
     return body;
   }

@@ -45,6 +45,7 @@ class NetworkHelper {
     String method = "GET",
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
     CancelToken? cancelToken,
     Options? options,
     ProgressCallback? onSendProgress,
@@ -52,16 +53,20 @@ class NetworkHelper {
     bool Function(ApiException)? onError,
   }) async {
     try {
+      final options = Options()
+        ..method = method
+        ..headers = headers;
+
       data = _convertRequestData(data);
 
       final response = await dio.request(
         url,
-        data: data,
         queryParameters: queryParameters,
+        data: data,
         cancelToken: cancelToken,
-        options: options,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
+        options: options,
       );
 
       return _handleResponse(response);
@@ -195,11 +200,11 @@ class NetworkHelper {
 
   ///业务内容处理
   ApiResponseModel _handleBusinessResponse(ApiResponseModel response) {
-    if (response.code == RequestConfig.successCode) {
+    if (response.errorCode != null) {
       return response;
     } else {
-      var exception = ApiException(response.code, response.message);
-      if (response.code == null && response.message == null) {
+      var exception = ApiException(response.errorCode, response.errorMessage);
+      if (response.errorCode == null && response.errorMessage == null) {
         exception = ApiException(-1, '服务器数据异常');
       }
       throw exception;

@@ -70,10 +70,10 @@ class EnvConfig {
   }
 
   static const Map _hosts = {
-    Env.dev: "219.144.185.121:11380",
-    Env.sandbox: "219.144.185.121:11380",
-    Env.pre: "219.144.185.121:11380",
-    Env.pro: "219.144.185.121:11380",
+    Env.dev: "124.71.46.114:9030",
+    Env.sandbox: "124.71.46.114:9030",
+    Env.pre: "124.71.46.114:9030",
+    Env.pro: "124.71.46.114:9030",
     // Env.dev: "wnsykj.drillass.com",
     // Env.sandbox: "wnsykj.drillass.com",
     // Env.pre: "wnsykj.drillass.com",
