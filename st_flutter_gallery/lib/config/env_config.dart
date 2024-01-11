@@ -1,19 +1,36 @@
+import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:st/app/constants/sp_keys.dart';
 import 'package:st/services/sp_service/sp_service.dart';
 
 enum Env {
   /// 开发环境
-  dev,
+  dev(0, '开发环境'),
 
   /// 沙盒环境
-  sandbox,
+  sandbox(1, '沙盒环境'),
 
   ///预发布环境
-  pre,
+  pre(2, '预发环境'),
 
   /// 正式环境
-  pro,
+  pro(3, '正式环境'),
+
+  /// 自定义
+  custom(4, '自定义环境');
+
+  const Env(this.value, this.title);
+
+  final int value;
+  final String title;
+
+  static Env fromString(int value) {
+    return values.firstWhere(
+      (v) => v.value == value,
+      orElse: () => Env.dev,
+    );
+  }
 }
 
 class EnvConfig {
@@ -24,22 +41,52 @@ class EnvConfig {
   static Env env = Env.pro;
 
   /// 是否使用https
-  static bool useHttps = true;
+  static bool useHttps = false;
+
+  /// 是否使用哀悼灰色
+  static bool isLamentGrey = false;
+
+  /// 是否使用https
+  static ValueNotifier<bool> isEnableUME = ValueNotifier(false);
 
   /// 协议头
-  static String get httpScheme => useHttps ? 'https' : 'http';
+  static String get httpScheme => useHttps ? 'https://' : 'http://';
 
   /// 服务器地址
-  static String get host => "${useHttps ? "https" : "http"}://${_hosts[env]}";
+  static String get baseUrl {
+    var baseUrl = '';
+    if (env == Env.custom) {
+      baseUrl = '$httpScheme${getEnvCustomUrl()}';
+    } else {
+      final host = _hosts[env];
+      baseUrl = '$httpScheme$host';
+    }
+
+    final baseUri = Uri.parse(baseUrl);
+
+    return baseUri.toString();
+  }
 
   static const Map _hosts = {
-    Env.dev: "dev.com",
-    Env.sandbox: "sandbox.com",
-    Env.pre: "pre.com",
-    Env.pro: "fastmock.site",
+    Env.dev: "219.144.185.121:11380",
+    Env.sandbox: "219.144.185.121:11380",
+    Env.pre: "219.144.185.121:11380",
+    Env.pro: "219.144.185.121:11380",
+    // Env.dev: "wnsykj.drillass.com",
+    // Env.sandbox: "wnsykj.drillass.com",
+    // Env.pre: "wnsykj.drillass.com",
+    // Env.pro: "wnsykj.drillass.com",
   };
 
   static Future<void> initEnvConfig() async {
+    useHttps = SpService.getBool(
+      SpKeys.isUseHttps,
+    )!;
+
+    isLamentGrey = SpService.getBool(
+      SpKeys.isLamentGrey,
+    )!;
+
     // 提前获取环境，之前Engine/init/env有点滞后
     final savedEnvVar = SpService.getInt(SpKeys.networkEnvShared);
     if (savedEnvVar != null) {
@@ -49,27 +96,19 @@ class EnvConfig {
     }
   }
 
-  static void _setEnv(Env env) {
+  static void setEnv(Env env) {
+    EnvConfig.env = env;
     SpService.setInt(SpKeys.networkEnvShared, env.index);
-    showToast("网络环境已设置为 ${envConvertString(env)}，重启后生效");
+    showToast('网络环境已设置为 @环境，重启后生效'.trParams({'环境': env.title}));
+    // Future.delayed(3.seconds, exit(0));
   }
 
-  static String envConvertString(Env env) {
-    final String envString;
-    switch (env) {
-      case Env.dev:
-        envString = '开发环境';
-        break;
-      case Env.sandbox:
-        envString = '沙盒环境';
-        break;
-      case Env.pre:
-        envString = '预发环境';
-        break;
-      case Env.pro:
-        envString = '正式环境';
-        break;
-    }
-    return envString;
+  static void setEnvCustom(Env env, {required String url}) {
+    SpService.setString(SpKeys.networkEnvCustom, url);
+    setEnv(env);
+  }
+
+  static String getEnvCustomUrl() {
+    return SpService.getString(SpKeys.networkEnvCustom) ?? '';
   }
 }

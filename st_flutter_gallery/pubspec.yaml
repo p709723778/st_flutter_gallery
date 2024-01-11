@@ -18,8 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
-
+  sdk: ">=2.17.0 <4.0.0"
+  flutter: ">=3.3.0"
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -36,92 +36,237 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
+  cupertino_icons: ^1.0.6
+  intl: ^0.19.0
   # 状态管理 / 国际化 / 路由等
-  get: ^4.6.5
+  get: ^4.6.6
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.2.2
   # 用于 schemes 跳转
-  url_launcher: ^6.1.5
+  url_launcher: ^6.2.3
   # http请求网络库
-  dio: ^4.0.6
+  dio: ^5.4.0
   # dio 网络请求库日志
-  pretty_dio_logger: ^1.1.1
+  pretty_dio_logger: ^1.3.1
+  # dio cookie 管理
+  dio_cookie_manager: ^3.1.1
+  cookie_jar: ^4.0.8
+  #  cookie_jar: ^3.0.1
   # webSocket网路通讯库
   # 测试连接 http://www.websocket.org/echo.html
   # 使用说明 https://flutterchina.club/cookbook/networking/web-sockets/
-  web_socket_channel: ^2.2.0
+  web_socket_channel: ^2.4.0
   # 响应式编程
-  rxdart: ^0.27.5
+  rxdart: ^0.27.7
   # 推送权限
-  permission_handler: ^10.0.0
+  permission_handler: ^11.1.0
   # iOS (Keychain) Android (KeyStore)
-  flutter_secure_storage: ^5.1.0
+  flutter_secure_storage: ^9.0.0
   # 日志输出管理
-  logging: ^1.0.2
+  logging: ^1.2.0
   # App内显示的log系统(支持普通log / 网络日志)
-  let_log: ^1.1.4
+  let_log:
+    git:
+      url: https://gitee.com/p709723778/let_log.git
   # 应用包相关信息
-  package_info: ^2.0.2
-  # device_info: ^2.0.0 #设备信息(只支持iOS Android)
+  package_info_plus: ^5.0.1
   # device_info_plus 设备信息(支持全平台)
-  device_info_plus: ^4.0.2
+  device_info_plus: ^9.1.1
   # 日期格式化库
-  date_format: ^2.0.6
+  date_format: ^2.0.7
   # 图片选择器(备选: multi_image_picker: ^4.8.0)
-  image_picker: ^0.8.5+3
+  image_picker: ^1.0.7
   # 网络连接状态
-  connectivity_plus: ^2.3.6
+  connectivity_plus: ^5.0.2
   # 唯一标识符
-  uuid: ^3.0.6
+  uuid: ^4.3.2
   # 编码转换
-  convert: ^3.0.2
-  # 加密
-  crypto: ^3.0.2
+  convert: ^3.1.1
+  # 支持SHA、MD5、HMAC 哈希加密
+  crypto: ^3.0.3
+  # 支持 AES / Salsa20 / Fernet / RSA 加密
+  encrypt: ^5.0.3
+  pointycastle: ^3.7.3
   # 解压缩
-  archive: ^3.3.1
+  archive: ^3.4.10
   # 监听值变化
-  provider: ^6.0.3
+  provider: ^6.1.1
   # 图片缓存
-  cached_network_image: ^3.2.1
+  cached_network_image: ^3.3.1
+  # svg 控件
+  flutter_svg: ^2.0.9
   # 腾讯 bug 统计
   flutter_bugly: ^0.4.4
   # 代码预览 & 显示源码
-  widget_with_codeview: ^2.0.1+2
+  widget_with_codeview:
+    git:
+      url: https://github.com/p709723778/widget_with_codeview.git
   # 用于适配屏幕和字体大小
-  flutter_screenutil: ^5.5.3+2
+  flutter_screenutil: ^5.9.0
   # 需要依赖的注解 https://github.com/google/json_serializable.dart/tree/master/example
-  json_annotation: ^4.6.0
+  json_annotation: ^4.8.1
   # toast提示
-  oktoast: ^3.2.0
+  oktoast: ^3.4.0
   # 上下拉刷新加载
-  pull_to_refresh: ^2.0.0
+  easy_refresh: ^3.3.4
   # 字符集
-  characters: ^1.2.0
+  characters: ^1.3.0
   # 文件路径
-  path_provider: ^2.0.11
-  path: ^1.8.1
+  path_provider: ^2.1.2
+  # 路径操作库
+  path: ^1.9.0
   # 主题管理
-  adaptive_theme: ^3.1.1
+  adaptive_theme: ^3.5.0
   # 滑动开关控件
   flutter_switch: ^0.3.2
-
+  # google官方数据通讯协议
+  protobuf: ^3.1.0
+  # tab_bar 三方库
+  convex_bottom_bar: ^3.2.0
+  # loading 控件
+  flutter_easyloading: ^3.0.5
+  # 各种样式控件库
+  getwidget: ^4.0.0
+  # 下拉列表
+  dropdown_button2: ^2.3.9
+  # 时间轴控件
+  timelines: ^0.1.0
+  # 设置回退到安卓手机桌面
+  move_to_background: ^1.0.2
+  just_throttle_it: ^2.1.0
+  just_debounce_it: ^4.1.0
+  flutterlifecyclehooks: ^4.0.0
+  flutter_cupertino_datetime_picker: ^3.0.0
+  # 设备摇晃监听
+  shake: ^2.2.0
+  # 跳转指定item
+  scroll_kit: ^0.1.0
+  # 模态底部弹窗
+  modal_bottom_sheet: ^2.1.2
+  # 动画播放
+  rive: ^0.12.4
+  lottie: ^2.7.0
+  # 指纹 / 面容 解锁
+  local_auth: ^2.1.8
+  # 版本比较
+  version: ^3.0.0
+  # 调试相关信息(此空间可以自己编写一个)
+#  debug_friend: ^1.0.0
+  # 防止屏幕休眠
+#  wakelock: ^0.6.2
+  # webView插件
+#  webview_flutter: ^4.2.1 # 官方
+  flutter_inappwebview: ^6.0.0
+  # 视频播放
+  video_player: ^2.8.2
+  # 音频播放
+  audioplayers: ^5.2.1
+  # 苹果登录
+  sign_in_with_apple: ^5.0.0
+  # 内购
+#  in_app_purchase: ^3.1.7
+  # 分享到其他应用
+  share_plus: ^7.2.1
+  # 调用iOS系统的 airplay
+  flutter_to_airplay: ^2.0.4
+  # 安装来源
+  install_referrer: ^1.2.1
+  # 文件下载 / 缓存管理
+  flutter_cache_manager: ^3.3.1
+  # 高性能网格布局视图 https://github.com/letsar/flutter_staggered_grid_view
+  flutter_staggered_grid_view: ^0.7.0
+  # 小部件可见性检测，用于监听小部件是否可见的小工具 https://github.com/google/flutter.widgets/tree/master/packages/visibility_detector
+  visibility_detector: ^0.4.0+2
+  # sqlite的so库
+  sqlite3_flutter_libs: ^0.5.18
+  # 裁剪小组件 https://github.com/xclud/flutter_crop
+  crop: ^0.5.5
+  # 点赞效果和喜欢数量
+  like_button: ^2.0.5
+  # 针对列表进行分组，并支持标题 https://github.com/Daniel-Ioannou/flutter_group_list_view
+  group_list_view: ^1.1.1
+  # 滑动过程中可固定标头的插件 https://github.com/letsar/flutter_sticky_header
+  flutter_sticky_header: ^0.6.5
+  # 键盘可见性反应器（用于检测键盘可见性） https://github.com/MisterJimson/flutter_keyboard_visibility
+  flutter_keyboard_visibility: ^5.4.1
+  # 图片压缩压缩插件 https://github.com/OpenFlutter/flutter_image_compress
+  flutter_image_compress: ^2.1.0
+  # 具有渐隐边缘的滚动视图 https://github.com/mponkin/fading_edge_scrollview
+  fading_edge_scrollview: ^4.0.0
+  # 用于decoration的虚线边框，类似BoxDocoration https://github.com/mdalameen/dotted_decoration
+  dotted_decoration: ^2.0.0
+  # 虚线边框小部件 https://github.com/ajilo297/Flutter-Dotted-Border
+  dotted_border: ^2.1.0
+  # 图片水印
+#  image_watermark: ^0.0.5
+  # 手势缩放小工具 https://github.com/shichaohui/gesture_zoom_box
+  gesture_zoom_box: ^0.0.4
+  # 解决官方不支持GBK转化问题 https://github.com/lixiangthinker/fast_gbk
+  fast_gbk: ^1.0.0
+  # 查看更多组件
+  readmore: ^2.2.0
+  # 通用链接工具类
+  uni_links: ^0.5.1
+  # 匹配文件和目录的模式
+  glob: ^2.1.2
+  # 上下滑动sheet
+  sliding_sheet2: ^2.0.1
+  # 允许多个程序共享数据（仅IOS） https://github.com/patrick-fu/flutter_shared_preference_app_group
+  shared_preference_app_group: 1.0.0+1
+  # 雪花id
+  flutter_snowflake: ^0.0.4
+  # 组件周围(上下左右) toast提示
+  super_tooltip: ^2.0.7
+  # 底部弹窗选择器，类似ios的效果
+  flutter_picker: ^2.1.0
+  # 组件跟随键盘消失 / 显示
+  keyboard_attachable: ^2.2.0
+  # 数字格式处理
+  decimal: ^2.3.3
+  # 悬浮拖动
+  draggable_float_widget: ^0.1.0
+  # 图片轮播, 有圆点索引
+  card_swiper: ^3.0.1
+  # Android安装apk
+  app_installer: ^1.1.0
+  # 可配置的收缩expansion_tile
+  configurable_expansion_tile_null_safety: ^3.3.2
+  # Android 隐私合规-剪切版功能
+  flutter_clipbord_conformance: ^0.0.4
+  # icon 角标数字
+  badges: ^3.1.2
+  # 屏幕上喷洒一些五彩纸屑特效
+  confetti: ^0.7.0
+  # 代替SizedBox, 节省渲染
+  nil: ^1.1.1
+  # 打开文件
+  open_file: ^3.3.2
+  # 验证码输入框
+  pin_code_fields: ^8.0.1
+  # 拾色器
+  flutter_colorpicker: ^1.0.3
+  # 蓝牙
+  flutter_blue_plus: ^1.31.7
+  # 类似ios cell 左滑删除组件
+  flutter_swipe_action_cell: ^3.1.3
+  # 微信分享 / 登录 / 支付
+  fluwx: ^4.4.9
+  # 腾讯QQ SDK
+  tencent_kit: ^6.0.1
+  # weibo sdk
+  weibo_kit:
+    git:
+      url: https://github.com/rxreader/weibo_kit.git
+  # 突出 展示 / 高亮
+  showcaseview: ^2.0.3
+  # 58集团热更方案
+  fair: ^3.4.0
+  ffi: ^2.1.0
 #dependency_overrides:
 #  characters: ^1.2.1
 
 # 开发环境依赖的工具包（而不是flutter应用本身依赖的包）
 dev_dependencies:
-
-  # JSON序列化model(Dart 代码生成工具)
-  build_runner: ^2.2.0
-  # json序列化
-  json_serializable: ^6.3.1
-  # 修改不同平台的 app名称 / bundleId
-  rename: ^2.0.1
-  # 统一修改启动页
-  flutter_native_splash: ^2.2.7
-  # 统一修改 App Icon
-  flutter_launcher_icons: ^0.10.0
 
   flutter_test:
     sdk: flutter
@@ -131,7 +276,42 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.1
+  flutter_lints: ^3.0.1
+  # JSON序列化model(Dart 代码生成工具)
+  build_runner: ^2.4.7
+  # json序列化
+  json_serializable: ^6.7.1
+  # 修改不同平台的 app名称 / bundleId
+  rename: ^3.0.1
+  # 统一修改启动页
+  #  flutter pub run flutter_native_splash:create --path=yaml/flutter_native_splash.yaml
+  flutter_native_splash: ^2.3.9
+  # 统一修改 App Icon
+  # 命令如下
+  # flutter pub run flutter_launcher_icons:main -f yaml/flutter_launcher_icons.yaml
+  flutter_launcher_icons: ^0.13.1
+
+
+  # 字节跳动的调试工具
+  flutter_ume_plus: ^3.0.0
+  flutter_ume_kit_dio_plus: ^3.4.4
+  flutter_ume_kit_show_code_plus: ^3.0.0
+  flutter_ume_kit_device_plus: ^2.0.0
+  flutter_ume_kit_console_plus: ^2.0.2
+  flutter_ume_kit_perf_plus: ^2.0.0
+  flutter_ume_kit_channel_monitor_plus: ^2.0.0
+  flutter_ume_kit_ui_plus: ^2.0.0
+
+dependency_overrides:
+#  flutter_lints: ^2.0.0
+  vm_service: ^14.0.0
+  path: ^1.9.0
+
+  # fair热更编译工具
+  fair_compiler: ^1.9.0
+  fair_version: ^3.13.0
+  ffi: ^2.1.0
+  intl: ^0.19.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -147,6 +327,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/icons/app_icon/
+    - assets/images/main/
+    - lib/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -175,3 +357,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+tencent_kit:
+  app_id: 1111047146
+  universal_link: https://fanbook.idreamsky.com/qq_conn/1111047146
+fluwx:
+  app_id: 1111047146
+  ios:
+    universal_link: https://fanbook.idreamsky.com/qq_conn/1111047146

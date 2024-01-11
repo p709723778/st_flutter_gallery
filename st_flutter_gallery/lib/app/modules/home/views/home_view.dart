@@ -1,14 +1,17 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:st/app/modules/home/controllers/home_controller.dart';
+import 'package:st/app/modules/home/views/grid_view_item.dart';
+import 'package:st/app/modules/home/views/group_item.dart';
+import 'package:st/app/routes/app_pages.dart';
+import 'package:st/config/env_config.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedTheme(
+    Widget body = AnimatedTheme(
       duration: const Duration(milliseconds: 300),
       data: Theme.of(context),
       child: GetBuilder<HomeController>(
@@ -19,142 +22,199 @@ class HomeView extends GetView<HomeController> {
             appBar: AppBar(
               // Here we take the value from the MyHomePage object that was created by
               // the App.build method, and use it to set our appbar title.
-              title: const Text('主页'),
+              title: Text('主页'.tr),
             ),
-            body: Center(
-              // Center is a layout widget. It takes a single child and positions it
-              // in the middle of the parent.
-              child: Column(
-                // Column is also a layout widget. It takes a list of children and
-                // arranges them vertically. By default, it sizes itself to fit its
-                // children horizontally, and tries to be as tall as its parent.
-                //
-                // Invoke "debug painting" (press "p" in the console, choose the
-                // "Toggle Debug Paint" action from the Flutter Inspector in Android
-                // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-                // to see the wireframe for each widget.
-                //
-                // Column has various properties to control how it sizes itself and
-                // how it positions its children. Here we use mainAxisAlignment to
-                // center the children vertically; the main axis here is the vertical
-                // axis because Columns are vertical (the cross axis would be
-                // horizontal).
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    'Current Theme Mode',
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 0.8,
+            body: ListView(
+              children: [
+                Container(
+                  // height: 150,
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(70),
+                      bottomRight: Radius.circular(70),
+                    ),
+                    gradient: LinearGradient(
+                      end: Alignment.topLeft,
+                      begin: Alignment.bottomRight,
+                      colors: [
+                        Colors.cyan,
+                        Colors.deepPurpleAccent,
+                      ],
                     ),
                   ),
-                  Text(
-                    AdaptiveTheme.of(context).mode.modeName.toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    'You have pushed the button this many times:',
-                  ),
-                  const Spacer(),
-                  const Text(
-                    'Current Theme Mode',
-                    style: TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                  Text(
-                    AdaptiveTheme.of(context).mode.modeName.toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () =>
-                        AdaptiveTheme.of(context).toggleThemeMode(),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
-                    ),
-                    child: const Text('Toggle Theme Mode'),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => AdaptiveTheme.of(context).setDark(),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
-                    ),
-                    child: const Text('Set Dark'),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => AdaptiveTheme.of(context).setLight(),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
-                    ),
-                    child: const Text('set Light'),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => AdaptiveTheme.of(context).setSystem(),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
-                    ),
-                    child: const Text('Set System Default'),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => AdaptiveTheme.of(context).setTheme(
-                      light: ThemeData(
-                        brightness: Brightness.light,
-                        primarySwatch: Colors.pink,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            '基础入门               \nFlutter 和 Dart',
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 22,
+                                    ),
+                          ),
+                          Image.asset(
+                            'assets/images/main/hand.png',
+                            width: 87 / 1.5,
+                            height: 164 / 1.5,
+                          ),
+                        ],
                       ),
-                      dark: ThemeData(
-                        brightness: Brightness.dark,
-                        primarySwatch: Colors.pink,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'assets/images/main/jiayou.png',
+                            width: 422 / 10,
+                            height: 1241 / 14,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 22),
+                            child: Text(
+                              '快速了解什么是Flutter和Dart,\n如何快速入门移动应用开发...',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
-                    ),
-                    child: const Text('Set Custom Theme'),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => AdaptiveTheme.of(context).reset(),
-                    style: ElevatedButton.styleFrom(
-                      visualDensity:
-                          const VisualDensity(horizontal: 4, vertical: 2),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 120,
+                        decoration: const BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(
+                              Icons.dashboard,
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Dart',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                                Text(
+                                  '基础知识',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        width: 120,
+                        decoration: const BoxDecoration(
+                          color: Colors.cyan,
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                        ),
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(
+                              Icons.tab_unselected_outlined,
+                              color: Colors.white,
+                              size: 35,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Flutter',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                                Text(
+                                  'widget示例',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const GroupItem(
+                  text: '常用组件',
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                ),
+                SizedBox(
+                  height: 140,
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: logic.gridViewDataSource.length,
+                    padding: const EdgeInsets.all(12),
+                    scrollDirection: Axis.horizontal,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1, //横轴三个子widget
+                      mainAxisSpacing: 12,
+                      crossAxisSpacing: 12,
                     ),
-                    child: const Text('Reset to Default Themes'),
+                    itemBuilder: (context, index) {
+                      return GridViewItem(
+                        commonWidgetModel: logic.gridViewDataSource[index],
+                        itemCallBack: (model) {
+                          Get.toNamed(Routes.COMPONENT_DETAIL_PAGE);
+                        },
+                      );
+                    },
                   ),
-                  Text(
-                    '${logic.count}',
-                    style: Theme.of(context).textTheme.headline4,
-                  ),
-                ],
-              ),
+                ),
+                const GroupItem(
+                  text: '札记',
+                  padding: EdgeInsets.symmetric(horizontal: 12),
+                ),
+              ],
             ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                AdaptiveTheme.of(context).toggleThemeMode();
-                logic.increment();
-              },
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            ), // This trailing comma makes auto-formatting nicer for build methods.
           );
         },
       ),
     );
+    if (EnvConfig.isLamentGrey) {
+      body = ColorFiltered(
+        colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.color),
+        child: body,
+      );
+    }
+
+    return body;
   }
 }
