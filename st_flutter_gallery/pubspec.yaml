@@ -43,7 +43,7 @@ dependencies:
   # 数据持久库(类似android的 SharedPreferences  iOS的 NSUserDefaults)
   shared_preferences: ^2.2.2
   # 用于 schemes 跳转
-  url_launcher: ^6.2.3
+  url_launcher: ^6.2.4
   # http请求网络库
   dio: ^5.4.0
   # dio 网络请求库日志
@@ -55,11 +55,11 @@ dependencies:
   # webSocket网路通讯库
   # 测试连接 http://www.websocket.org/echo.html
   # 使用说明 https://flutterchina.club/cookbook/networking/web-sockets/
-  web_socket_channel: ^2.4.0
+  web_socket_channel: ^2.4.3
   # 响应式编程
   rxdart: ^0.27.7
   # 推送权限
-  permission_handler: ^11.1.0
+  permission_handler: ^11.2.0
   # iOS (Keychain) Android (KeyStore)
   flutter_secure_storage: ^9.0.0
   # 日志输出管理
@@ -79,14 +79,14 @@ dependencies:
   # 网络连接状态
   connectivity_plus: ^5.0.2
   # 唯一标识符
-  uuid: ^4.3.2
+  uuid: ^4.3.3
   # 编码转换
   convert: ^3.1.1
   # 支持SHA、MD5、HMAC 哈希加密
   crypto: ^3.0.3
   # 支持 AES / Salsa20 / Fernet / RSA 加密
   encrypt: ^5.0.3
-  pointycastle: ^3.7.3
+  pointycastle: ^3.7.4
   # 解压缩
   archive: ^3.4.10
   # 监听值变化
@@ -145,7 +145,7 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   # 动画播放
   rive: ^0.12.4
-  lottie: ^2.7.0
+  lottie: ^3.0.0
   # 指纹 / 面容 解锁
   local_auth: ^2.1.8
   # 版本比较
@@ -178,7 +178,7 @@ dependencies:
   # 小部件可见性检测，用于监听小部件是否可见的小工具 https://github.com/google/flutter.widgets/tree/master/packages/visibility_detector
   visibility_detector: ^0.4.0+2
   # sqlite的so库
-  sqlite3_flutter_libs: ^0.5.18
+  sqlite3_flutter_libs: ^0.5.19+1
   # 裁剪小组件 https://github.com/xclud/flutter_crop
   crop: ^0.5.5
   # 点赞效果和喜欢数量
@@ -246,7 +246,7 @@ dependencies:
   # 拾色器
   flutter_colorpicker: ^1.0.3
   # 蓝牙
-  flutter_blue_plus: ^1.31.7
+  flutter_blue_plus: ^1.31.8
   # 类似ios cell 左滑删除组件
   flutter_swipe_action_cell: ^3.1.3
   # 微信分享 / 登录 / 支付
@@ -278,7 +278,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.1
   # JSON序列化model(Dart 代码生成工具)
-  build_runner: ^2.4.7
+  build_runner: ^2.4.8
   # json序列化
   json_serializable: ^6.7.1
   # 修改不同平台的 app名称 / bundleId
@@ -303,6 +303,7 @@ dev_dependencies:
   flutter_ume_kit_ui_plus: ^2.0.0
 
 dependency_overrides:
+  web: ^0.4.2
 #  flutter_lints: ^2.0.0
   vm_service: ^14.0.0
   path: ^1.9.0
